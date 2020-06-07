@@ -1,9 +1,10 @@
 import React from "react";
+import Feed from "./components/Feed";
 
 const App: React.FC = () => {
 	return (
 		<>
-			<h1>Hello From The App!</h1>
+			<Feed />
 		</>
 	);
 };

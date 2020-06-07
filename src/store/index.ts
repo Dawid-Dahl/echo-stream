@@ -1,9 +1,9 @@
 import {createStore, combineReducers, applyMiddleware} from "redux";
-import {reducer} from "../reducers/reducers";
+import {feedReducer, tweetsReducer} from "../reducers/reducers";
 import {composeWithDevTools} from "redux-devtools-extension";
 import ReduxThunk from "redux-thunk";
 
-export const rootReducer = combineReducers({reducer});
+export const rootReducer = combineReducers({feedReducer, tweetsReducer});
 
 export type RootState = ReturnType<typeof rootReducer>;
 
