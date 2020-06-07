@@ -1,13 +1,12 @@
 import {TweetsActionTypes} from "../actions/tweetsActions";
+import {Status as Tweet} from "twitter-d";
 
 export type TweetsReducerState = {
 	tweets: Tweet[];
 };
 
 const initialState: TweetsReducerState = {
-	isFetching: true,
-	fetchSpeed: 5000,
-	error: null,
+	tweets: [],
 };
 
 export const tweetsReducer = (
