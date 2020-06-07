@@ -19,13 +19,15 @@
 	},
 	"homepage": "https://github.com/Dawid-Dahl/dynamic-twitter-feed#readme",
 	"dependencies": {
+		"dotenv": "^8.2.0",
 		"parcel-bundler": "^1.12.4",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
 		"react-redux": "^7.2.0",
 		"redux-devtools-extension": "^2.13.8",
 		"redux-thunk": "^2.3.0",
-		"styled-components": "^5.1.1"
+		"styled-components": "^5.1.1",
+		"twit": "^2.2.11"
 	},
 	"devDependencies": {
 		"@types/jest": "^25.2.3",
