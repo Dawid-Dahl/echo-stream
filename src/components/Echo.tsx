@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import {SocialMediaPlatforms} from "../types/types";
 
 export type Echo = {
 	id: string;
@@ -7,17 +8,20 @@ export type Echo = {
 	likes: number;
 	author: string;
 	date: Date | string;
+	imageUrl?: string;
+	profileImageUrl?: string;
+	platform: SocialMediaPlatforms;
 };
 
-type Props = Omit<Echo, "id" | "date">;
+type Props = Omit<Echo, "id">;
 
-const Echo: React.FC<Props> = ({text, likes, author}) => {
+const Echo: React.FC<Props> = ({text, likes, author, date}) => {
 	return (
 		<Wrapper>
 			<h3>{text}</h3>
 			<p>{likes}</p>
 			<p>{author}</p>
-			<p>{"a day ago"}</p>
+			<p>{date}</p>
 		</Wrapper>
 	);
 };
@@ -36,6 +40,7 @@ const Wrapper = styled.div`
 
 	h3 {
 		margin: 0.4em;
+		text-align: center;
 	}
 
 	p {

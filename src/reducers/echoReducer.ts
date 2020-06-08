@@ -1,19 +1,12 @@
 import {EchoActionTypes} from "../actions/echoActions";
-import {range, echo} from "../utils/utils";
 import {Echo} from "../components/Echo";
 
-//Use dummy data until actual Twitter integration
-
-const dummyData = range(1, 3).map(x =>
-	echo("This is the echo content.", Math.round(Math.random() * 10), "author")
-);
-
 export type EchoReducerState = {
-	echo: Echo[];
+	echoes: Echo[];
 };
 
 const initialState: EchoReducerState = {
-	echo: dummyData,
+	echoes: [],
 };
 
 export const echoReducer = (
@@ -24,7 +17,10 @@ export const echoReducer = (
 		case "ADD_SINGLE_ECHO":
 			return {
 				...state,
-				echo: state.echo.length >= 500 ? [...state.echo] : [...state.echo, action.payload],
+				echoes:
+					state.echoes.length >= 1000
+						? [...state.echoes]
+						: [action.payload, ...state.echoes],
 			};
 		default:
 			return state;

@@ -1,14 +1,9 @@
-import React, {useEffect} from "react";
+import React from "react";
 import styled from "styled-components";
-import {RootState} from "../store";
-import Echo from "./Echo";
-import {echo} from "../utils/utils";
-import {useSelector, useDispatch} from "react-redux";
-import {addSingleEcho} from "../actions/echoActions";
 
 type Props = {
 	text: string;
-	hashtag: string;
+	hashtag: string | null;
 };
 
 const FeedHeader: React.FC<Props> = ({text, hashtag}) => {

@@ -1,37 +1,37 @@
-import React, {useEffect} from "react";
+import React from "react";
 import styled from "styled-components";
 import {RootState} from "../store";
 import Echo from "./Echo";
-import {echo} from "../utils/utils";
-import {useSelector, useDispatch} from "react-redux";
-import {addSingleEcho} from "../actions/echoActions";
 import FeedHeader from "./FeedHeader";
+import useUpdateFeed from "../customHooks/useUpdateFeed";
+import {useSelector} from "react-redux";
+import WelcomeMessage from "./WelcomeMessage";
 
 type Props = {};
 
 const Feed: React.FC<Props> = () => {
-	const echoes = useSelector((state: RootState) => state.echoReducer.echo);
-	const dispatch = useDispatch();
+	const echoes = useSelector((state: RootState) => state.echoReducer.echoes);
+	const hashtag = useSelector((state: RootState) => state.feedReducer.hashtag);
 
-	useEffect(() => {
-		const clear = setInterval(() => {
-			dispatch(
-				addSingleEcho(
-					echo("This is the echo content.", Math.round(Math.random() * 10), "author")
-				)
-			);
-		}, 2000);
-		return () => {
-			clearInterval(clear);
-		};
-	}, []);
+	useUpdateFeed();
 
 	return (
 		<Wrapper>
-			<FeedHeader text="DELTA I KONVERSATIONEN PÅ TWITTER" hashtag="#awesomehashtag" />
-			{echoes.map(echo => (
-				<Echo key={echo.id} text={echo.text} likes={echo.likes} author={echo.author} />
-			))}
+			<FeedHeader text="DELTA I KONVERSATIONEN PÅ TWITTER" hashtag={hashtag} />
+			{echoes.length === 0 ? (
+				<WelcomeMessage hashtag={hashtag} />
+			) : (
+				echoes.map(echo => (
+					<Echo
+						key={echo.id}
+						text={echo.text}
+						likes={echo.likes}
+						author={echo.author}
+						date={echo.date}
+						platform={echo.platform}
+					/>
+				))
+			)}
 		</Wrapper>
 	);
 };
