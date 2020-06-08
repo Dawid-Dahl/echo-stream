@@ -24,12 +24,12 @@ const WelcomeMessage: React.FC<Props> = ({hashtag}) => {
 	return (
 		<Wrapper>
 			<h2>Welcome to the event!</h2>
-			<h3>See your message displayed here by posting to the hashtag: ${hashtag}</h3>
+			<h3>See your message displayed here by posting to the hashtag:</h3>
 			<h1>{`${hashtag}`}</h1>
-			<button onClick={e => dispatch(startFeedAsync("#LOLLERCAUSTER"))}>
+			{/* <button onClick={e => dispatch(startFeedAsync("#LOLLERCAUSTER"))}>
 				START FEED ASYNC
 			</button>
-			<button onClick={e => dispatch(stopFeedAsync())}>STOP FEED ASYNC</button>
+			<button onClick={e => dispatch(stopFeedAsync())}>STOP FEED ASYNC</button> */}
 		</Wrapper>
 	);
 };

@@ -4,8 +4,9 @@ import errorhandler from "errorhandler";
 import apiRouter from "./api/routes/api";
 import morgan from "morgan";
 import cors from "cors";
+import io from "socket.io";
 
-export const app = express();
+const app = express();
 
 const PORT = process.env.PORT || 5000;
 
@@ -15,7 +16,7 @@ app.use(morgan("dev"));
 app.use(
 	cors({
 		origin: "http://localhost:1234",
-		exposedHeaders: ["x-token"],
+		credentials: true,
 	})
 );
 
@@ -31,4 +32,10 @@ app.use("/api", apiRouter);
 
 app.use(errorhandler());
 
-app.listen(PORT, () => console.log(`Server now listening at port: ${PORT}`));
+export const server = app.listen(PORT, () => console.log(`Server now listening at port: ${PORT}`));
+
+export const ioServer = io.listen(server);
+
+ioServer.on("connection", client => {
+	console.log("Client connected!");
+});

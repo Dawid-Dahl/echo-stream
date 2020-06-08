@@ -1,26 +1,30 @@
 import store, {RootState} from "../store";
-import {startFeedAsync} from "../actions/feedActions";
+import {startFeedAsync, stopFeedAsync} from "../actions/feedActions";
 import {Action} from "redux";
 import {ThunkDispatch} from "redux-thunk";
 
-export type StreamService = {
+export type ServerAPIService = {
 	start: (hashtag: string) => void;
 	stop: () => void;
 };
 
-const unconfiguredStreamService = (
+//Communicates With Server
+
+const unconfiguredServerAPIService = (
 	dispatch: ThunkDispatch<RootState, unknown, Action<string>>
 ) => () => ({
-	from(): StreamService {
+	from(): ServerAPIService {
 		return {
 			start(hashtag: string) {
 				dispatch(startFeedAsync(hashtag));
 			},
 			stop() {
-				/* dispatch(stopFeedAsync()); */
+				dispatch(stopFeedAsync());
 			},
 		};
 	},
 });
 
-export default unconfiguredStreamService(store.dispatch);
+const serverAPIService = unconfiguredServerAPIService(store.dispatch);
+
+export default serverAPIService;

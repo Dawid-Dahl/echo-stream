@@ -1,27 +1,35 @@
 import {Echo} from "../components/Echo";
-import {SocialMediaPlatforms} from "../types/types";
 import {generateId} from "../utils/utils";
 
 const unconfiguredEcho = (generateId: () => string) => ({
 	from(
+		sourceId: string,
 		text: string,
-		likes: number,
 		author: string,
-		platform: SocialMediaPlatforms,
-		imageUrl?: string,
-		profileImageUrl?: string
+		sourceDate: Date | string,
+		sourceLikesFavorites: number,
+		profileImageUrl?: string,
+		sourceLink?: string,
+		mediaUrl?: string,
+		likes: number = 0
 	): Echo {
 		return {
 			id: generateId(),
+			sourceId,
 			text,
 			likes,
 			author,
-			date: new Date().toLocaleString(),
-			imageUrl,
+			date: Date.now(),
+			sourceDate,
+			sourceLikesFavorites,
+			sourceLink,
+			mediaUrl,
 			profileImageUrl,
-			platform,
+			platform: "twitter",
 		};
 	},
 });
 
-export default unconfiguredEcho(generateId);
+const echo = unconfiguredEcho(generateId);
+
+export default echo;

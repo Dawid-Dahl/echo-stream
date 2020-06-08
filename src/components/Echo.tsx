@@ -4,11 +4,15 @@ import {SocialMediaPlatforms} from "../types/types";
 
 export type Echo = {
 	id: string;
+	sourceId: string;
 	text: string;
 	likes: number;
+	sourceLikesFavorites: number;
 	author: string;
-	date: Date | string;
-	imageUrl?: string;
+	date: number;
+	sourceDate: Date | string;
+	sourceLink?: string;
+	mediaUrl?: string;
 	profileImageUrl?: string;
 	platform: SocialMediaPlatforms;
 };
