@@ -36,6 +36,8 @@ const unconfiguredfeedService = (io: SocketIOClientStatic, dispatch: Dispatch): 
 
 		console.log(`Listening for "${this.event}" events.`);
 
+		console.log(this.event);
+
 		this.socket.on(this.event, (data: any) => {
 			const echo = echoConverter("twitter", data);
 

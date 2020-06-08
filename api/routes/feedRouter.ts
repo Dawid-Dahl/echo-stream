@@ -12,7 +12,7 @@ feedRouter.post("/start", async (req, res) => {
 
 		const {hashtag} = req.body;
 
-		const stream = T.stream("statuses/filter", {track: hashtag ?? ""});
+		const stream = T.stream("statuses/filter", {track: hashtag ?? "#BACKUPHASHTAG"});
 
 		console.log("Stream has been started.");
 
