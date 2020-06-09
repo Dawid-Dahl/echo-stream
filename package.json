@@ -5,7 +5,7 @@
 	"main": "server.ts",
 	"scripts": {
 		"start": "parcel ./src/index.html",
-		"startServer": "nodemon server.ts",
+		"startServer": "npx ts-node ./server.ts",
 		"build": "parcel build src/index.html",
 		"test": "jest"
 	},

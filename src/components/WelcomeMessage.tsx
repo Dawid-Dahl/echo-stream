@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import {SocialMediaPlatforms} from "../types/types";
-import {startFeedAsync, stopFeedAsync} from "../actions/feedActions";
 import {useDispatch} from "react-redux";
 
 export type Echo = {
@@ -26,10 +25,6 @@ const WelcomeMessage: React.FC<Props> = ({hashtag}) => {
 			<h2>Welcome to the event!</h2>
 			<h3>See your message displayed here by posting to the hashtag:</h3>
 			<h1>{`${hashtag}`}</h1>
-			{/* <button onClick={e => dispatch(startFeedAsync("#LOLLERCAUSTER"))}>
-				START FEED ASYNC
-			</button>
-			<button onClick={e => dispatch(stopFeedAsync())}>STOP FEED ASYNC</button> */}
 		</Wrapper>
 	);
 };

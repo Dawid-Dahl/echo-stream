@@ -4,6 +4,13 @@ import {Dispatch} from "redux";
 import echoConverter from "./echoConverter";
 import {addSingleEcho} from "../actions/echoActions";
 import {Echo} from "../components/Echo";
+import {config} from "dotenv";
+
+config({
+	path: "../../.env",
+});
+
+if (!process.env.SERVER_URL) throw new Error("Can't retrieve .env variable.");
 
 export type FeedService = {
 	socket: SocketIOClient.Socket | null;
@@ -32,11 +39,11 @@ const unconfiguredfeedService = (io: SocketIOClientStatic, dispatch: Dispatch): 
 			return;
 		}
 
+		this.connect(process.env.SERVER_URL!);
+
 		this.event = event;
 
 		console.log(`Listening for "${this.event}" events.`);
-
-		console.log(this.event);
 
 		this.socket.on(this.event, (data: any) => {
 			const echo = echoConverter("twitter", data);

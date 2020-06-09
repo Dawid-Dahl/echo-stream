@@ -6,7 +6,7 @@ import {startFeedAsync} from "./actions/feedActions";
 const App: React.FC = () => {
 	const dispatch = useDispatch();
 
-	const hashtag = "#arnedramatix";
+	const hashtag = "#dogs";
 
 	useEffect(() => {
 		dispatch(startFeedAsync(hashtag));

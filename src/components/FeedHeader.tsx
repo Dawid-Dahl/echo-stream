@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import {useDispatch} from "react-redux";
+import {startFeedAsync, stopFeedAsync} from "../actions/feedActions";
 
 type Props = {
 	text: string;
@@ -7,9 +9,14 @@ type Props = {
 };
 
 const FeedHeader: React.FC<Props> = ({text, hashtag}) => {
+	const dispatch = useDispatch();
 	return (
 		<Wrapper>
 			<p>{`${text}: ${hashtag}`}</p>
+			<button onClick={e => hashtag && dispatch(startFeedAsync(hashtag))}>
+				START FEED ASYNC
+			</button>
+			<button onClick={e => dispatch(stopFeedAsync())}>STOP FEED ASYNC</button>
 		</Wrapper>
 	);
 };

@@ -19,8 +19,6 @@ const Feed: React.FC<Props> = () => {
 	const echoes = useSelector((state: RootState) => state.echoReducer.echoes);
 	const {hashtag, isFetching} = useSelector((state: RootState) => state.feedReducer);
 
-	if (!process.env.SERVER_URL) throw new Error("Can't retrieve .env variable.");
-
 	useEffect(() => {
 		if (isFetching) {
 			if (feedService.isConnected()) {

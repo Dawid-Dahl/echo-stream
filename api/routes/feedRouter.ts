@@ -17,6 +17,7 @@ feedRouter.post("/start", async (req, res) => {
 		console.log("Stream has been started.");
 
 		stream.on("tweet", tweet => {
+			console.log("Emitting tweet!");
 			ioServer.emit(`TWEET_${hashtag}`, {tweet});
 		});
 
@@ -52,6 +53,19 @@ feedRouter.get("/stop", async (req, res) => {
 		res.status(200).json(
 			jsonResponse(true, JSON.stringify({message: "Stream has been stopped!"}))
 		);
+
+		setTimeout(() => {
+			process.on("exit", () => {
+				console.log("Restarting process!");
+				require("child_process").spawn(process.argv.shift(), process.argv, {
+					cwd: process.cwd(),
+					detached: true,
+					stdio: "inherit",
+				});
+			});
+
+			process.exit();
+		}, 1000);
 	} catch (e) {
 		console.log(e);
 	}
