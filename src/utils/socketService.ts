@@ -12,7 +12,7 @@ config({
 
 if (!process.env.SERVER_URL) throw new Error("Can't retrieve .env variable.");
 
-export type FeedService = {
+export type SocketService = {
 	socket: SocketIOClient.Socket | null;
 	event: string | null;
 	isConnected: () => boolean;
@@ -23,7 +23,10 @@ export type FeedService = {
 
 //Communicates With Socket.io
 
-const unconfiguredfeedService = (io: SocketIOClientStatic, dispatch: Dispatch): FeedService => ({
+const unconfiguredsocketService = (
+	io: SocketIOClientStatic,
+	dispatch: Dispatch
+): SocketService => ({
 	socket: null,
 	event: null,
 	isConnected() {
@@ -57,6 +60,6 @@ const unconfiguredfeedService = (io: SocketIOClientStatic, dispatch: Dispatch): 
 	},
 });
 
-const feedService = unconfiguredfeedService(io, store.dispatch);
+const socketService = unconfiguredsocketService(io, store.dispatch);
 
-export default feedService;
+export default socketService;

@@ -21,8 +21,6 @@ app.use(
 );
 
 app.locals.stream = null;
-app.locals.isFetching = false;
-app.locals.hashtag = null;
 
 if (process.env.NODE_ENV === "production") {
 	app.use(express.static("dist"));

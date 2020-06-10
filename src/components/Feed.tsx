@@ -6,8 +6,9 @@ import FeedHeader from "./FeedHeader";
 import useUpdateFeed from "../customHooks/useUpdateFeed";
 import {useSelector} from "react-redux";
 import WelcomeMessage from "./WelcomeMessage";
-import feedService from "../utils/feedService";
+import socketService from "../utils/socketService";
 import {config} from "dotenv";
+import {Platforms} from "../types/enums";
 
 config({
 	path: "../../.env",
@@ -17,24 +18,24 @@ type Props = {};
 
 const Feed: React.FC<Props> = () => {
 	const echoes = useSelector((state: RootState) => state.echoReducer.echoes);
-	const {hashtag, isFetching} = useSelector((state: RootState) => state.feedReducer);
+	const {hashtag, isFeedActive} = useSelector((state: RootState) => state.feedReducer);
 
-	useEffect(() => {
-		if (isFetching) {
-			if (feedService.isConnected()) {
-				if (hashtag) feedService.listenForAndStoreEchoes(`TWEET_${hashtag}`);
+	/* useEffect(() => {
+		if (isFeedActive) {
+			if (socketService.isConnected()) {
+				if (hashtag)
+					socketService.listenForAndStoreEchoes(`${Platforms.twitter}_${hashtag}`);
 			} else {
-				feedService.connect(process.env.SERVER_URL!);
-				if (hashtag) feedService.listenForAndStoreEchoes(`TWEET_${hashtag}`);
+				socketService.connect(process.env.SERVER_URL!);
+				if (hashtag)
+					socketService.listenForAndStoreEchoes(`${Platforms.twitter}_${hashtag}`);
 			}
 		} else {
 			if (hashtag) {
-				feedService.close();
+				socketService.close();
 			}
 		}
-	}, [isFetching, hashtag]);
-
-	useUpdateFeed();
+	}, [isFeedActive, hashtag]); */
 
 	return (
 		<Wrapper>

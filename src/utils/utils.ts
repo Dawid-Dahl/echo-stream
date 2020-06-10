@@ -1,4 +1,4 @@
-import {AuthJsonResponse} from "../types/types";
+import {JsonResponse} from "../types/types";
 import {Stream} from "twit";
 import {Request} from "express-serve-static-core";
 
@@ -10,7 +10,7 @@ export const generateId = () => Math.random().toString(36).substring(2) + Date.n
 export const jsonResponse = (
 	success: boolean,
 	payload?: string | NodeJS.ReadableStream | undefined
-): AuthJsonResponse => (!payload ? {success} : {success, payload});
+): JsonResponse => (!payload ? {success} : {success, payload});
 
 export const isServerLive = async (url: string): Promise<boolean> => {
 	try {

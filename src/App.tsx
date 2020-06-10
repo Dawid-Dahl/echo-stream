@@ -1,15 +1,15 @@
 import React, {useEffect} from "react";
 import Feed from "./components/Feed";
 import {useDispatch} from "react-redux";
-import {startFeedAsync} from "./actions/feedActions";
+import {startFeed} from "./actions/feedActions";
 
 const App: React.FC = () => {
 	const dispatch = useDispatch();
 
-	const hashtag = "#dogs";
+	const HASHTAG = "#dogs";
 
 	useEffect(() => {
-		dispatch(startFeedAsync(hashtag));
+		dispatch(startFeed(HASHTAG));
 	}, []);
 
 	return (

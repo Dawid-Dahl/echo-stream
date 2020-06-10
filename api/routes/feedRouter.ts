@@ -3,6 +3,7 @@ import T from "../../config/twitConfig";
 import {jsonResponse, unconfiguredSetLocalNodeState} from "../../src/utils/utils";
 import {Stream} from "twit";
 import {ioServer} from "../../server";
+import {Platforms} from "../../src/types/enums";
 
 const feedRouter = express.Router();
 
@@ -16,18 +17,30 @@ feedRouter.post("/start", async (req, res) => {
 
 		console.log("Stream has been started.");
 
+		const emittedEvent = `${Platforms.twitter}_${hashtag}`;
+
 		stream.on("tweet", tweet => {
 			console.log("Emitting tweet!");
-			ioServer.emit(`TWEET_${hashtag}`, {tweet});
+			ioServer.emit(emittedEvent, {tweet});
 		});
 
 		setLocalNodeState(true, stream, hashtag);
 
 		res.status(200).json(
-			jsonResponse(true, JSON.stringify({message: "Stream has started!", hashtag: hashtag}))
+			jsonResponse(
+				true,
+				JSON.stringify({
+					message: "Stream has started as is emitting !",
+					hashtag,
+					emittedEvent,
+				})
+			)
 		);
 	} catch (e) {
 		console.log(e);
+		res.status(404).json(
+			jsonResponse(false, JSON.stringify({message: "Couldn't connect to the feed server."}))
+		);
 	}
 });
 
@@ -63,11 +76,16 @@ feedRouter.get("/stop", async (req, res) => {
 					stdio: "inherit",
 				});
 			});
-
 			process.exit();
 		}, 1000);
 	} catch (e) {
 		console.log(e);
+		res.status(404).json(
+			jsonResponse(
+				false,
+				JSON.stringify({message: "Something went wrong while stopping the feed server."})
+			)
+		);
 	}
 });
 

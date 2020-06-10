@@ -1,14 +1,12 @@
 import {useEffect} from "react";
 import {RootState} from "../store";
-import {useSelector, useDispatch} from "react-redux";
-import {addSingleEcho} from "../actions/echoActions";
-import echo from "../entities/echo";
+import {useSelector} from "react-redux";
 
 const useUpdateFeed = () => {
-	const {fetchSpeed, isFetching} = useSelector((state: RootState) => state.feedReducer);
+	const {fetchSpeed, isFeedActive} = useSelector((state: RootState) => state.feedReducer);
 
 	useEffect(() => {
-		if (isFetching) {
+		if (isFeedActive) {
 			const clear = setInterval(() => {
 				console.log("Updating");
 			}, fetchSpeed);
@@ -16,7 +14,7 @@ const useUpdateFeed = () => {
 				clearInterval(clear);
 			};
 		}
-	}, [fetchSpeed, isFetching]);
+	}, [fetchSpeed, isFeedActive]);
 };
 
 export default useUpdateFeed;
