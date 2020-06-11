@@ -1,14 +1,8 @@
 import {SocketUri} from "../types/types";
 
-export const openSocketConnection = (socketUri: SocketUri) =>
+export const openSocketConnection = (socket: SocketIOClient.Socket) =>
 	({
 		type: "OPEN_SOCKET_CONNECTION",
-		socketUri,
-	} as const);
-
-export const openSocketConnectionFulfilled = (socket: SocketIOClient.Socket) =>
-	({
-		type: "OPEN_SOCKET_CONNECTION_FULFILLED",
 		socket,
 	} as const);
 
@@ -35,7 +29,6 @@ export const closeSocketConnectionRejected = () =>
 
 export type SocketActionTypes =
 	| ReturnType<typeof openSocketConnection>
-	| ReturnType<typeof openSocketConnectionFulfilled>
 	| ReturnType<typeof openSocketConnectionRejected>
 	| ReturnType<typeof closeSocketConnection>
 	| ReturnType<typeof closeSocketConnectionFulfilled>

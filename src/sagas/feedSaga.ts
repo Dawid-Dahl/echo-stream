@@ -1,19 +1,23 @@
-import {take, takeEvery, put, call, fork} from "redux-saga/effects";
+import {take, fork, put, call} from "redux-saga/effects";
 import {
 	startFeed,
 	startFeedFulfilled,
 	setHashtag,
+	stopFeed,
 	stopFeedFulfilled,
 	setEmittedEvent,
 	startFeedRejected,
 	stopFeedRejected,
 } from "../actions/feedActions";
-import {Hashtag, JsonResponse, ParsedJsonResponsePayload, SocketUri} from "../types/types";
+import {Hashtag, JsonResponse, ParsedJsonResponsePayload} from "../types/types";
+import socketService from "../utils/socketService";
+import {subscribe} from "./socketGenerators";
 import {
-	openSocketConnection,
-	openSocketConnectionFulfilled,
 	openSocketConnectionRejected,
+	openSocketConnection,
+	closeSocketConnection,
 } from "../actions/socketActions";
+import {getEmittedEvent, _select} from "./selectors";
 
 function* workerStartFeed({hashtag}: ReturnType<typeof startFeed>) {
 	try {
@@ -32,12 +36,9 @@ function* workerStartFeed({hashtag}: ReturnType<typeof startFeed>) {
 
 			const {emittedEvent}: ParsedJsonResponsePayload = JSON.parse(data.payload as string);
 
-			if (!process.env.SERVER_URL)
-				throw new Error("Can't find server URL enviroment variable");
-
 			yield put(startFeedFulfilled());
 			yield put(setEmittedEvent(emittedEvent));
-			yield put(openSocketConnection(process.env.SERVER_URL as string));
+			/* yield put(openSocketConnection(process.env.SERVER_URL as string)); */
 		} else {
 			yield put(startFeedRejected("Couldn't connect to the feed server."));
 		}
@@ -62,18 +63,44 @@ function* workerStopFeed() {
 	}
 }
 
+function* workerSocketListen(socket: SocketIOClient.Socket) {
+	const emittedEvent = yield* _select(getEmittedEvent);
+
+	const channel = yield call(subscribe, socket);
+
+	while (true) {
+		const action:
+			| ReturnType<typeof openSocketConnection>
+			| ReturnType<typeof closeSocketConnection> = yield take(channel);
+
+		if (action.type === "CLOSE_SOCKET_CONNECTION") socketService.close(socket, emittedEvent);
+
+		yield put(action);
+	}
+}
+
 function* feedSaga() {
-	yield takeEvery("START_FEED", workerStartFeed);
-	yield takeEvery("STOP_FEED", workerStopFeed);
+	while (true) {
+		const action: ReturnType<typeof startFeed> | ReturnType<typeof stopFeed> = yield take([
+			"START_FEED",
+			"STOP_FEED",
+		]);
 
-	/* yield take(["OPEN_SOCKET_CONNECTION", "START_FEED_REJECTED"]);
+		if (action.type === "START_FEED") {
+			yield call(workerStartFeed, action);
 
-		const openSocketConnectionAction: ReturnType<typeof openSocketConnection> = yield take(
-			"OPEN_SOCKET_CONNECTION"
-		);
-		const socketTask = yield fork(workerOpenSocketConnection, openSocketConnectionAction);
+			const socket: SocketIOClient.Socket | null = yield call(
+				[socketService, socketService.connect],
+				process.env.SERVER_URL!
+			);
 
-		yield takeEvery("START_FEED_REJECTED", () => socketTask.cancel()); */
+			if (!socket) throw new Error("Socket connection couldn't be established.");
+
+			yield fork(workerSocketListen, socket);
+		} else {
+			yield call(workerStopFeed);
+		}
+	}
 }
 
 export default feedSaga;

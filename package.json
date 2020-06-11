@@ -24,6 +24,7 @@
 		"dotenv": "^8.2.0",
 		"errorhandler": "^1.5.1",
 		"express": "^4.17.1",
+		"http2": "^3.3.7",
 		"parcel-bundler": "^1.12.4",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",

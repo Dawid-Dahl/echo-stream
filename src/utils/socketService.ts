@@ -1,10 +1,8 @@
 import store from "../store";
 import io from "socket.io-client";
-import {Dispatch} from "redux";
-import echoConverter from "./echoConverter";
-import {addSingleEcho} from "../actions/echoActions";
-import {Echo} from "../components/Echo";
 import {config} from "dotenv";
+import {SocketUri} from "../types/types";
+import {FeedReducerState} from "../reducers/reducers";
 
 config({
 	path: "../../.env",
@@ -13,30 +11,27 @@ config({
 if (!process.env.SERVER_URL) throw new Error("Can't retrieve .env variable.");
 
 export type SocketService = {
-	socket: SocketIOClient.Socket | null;
-	event: string | null;
-	isConnected: () => boolean;
-	connect: (socketUri: string) => void;
-	listenForAndStoreEchoes: (event: string) => void;
-	close: () => void;
+	connect: (socketUri: SocketUri) => Promise<SocketIOClient.Socket | null>;
+	/* listenForAndStoreEchoes: (event: string) => void; */
+	close: (socket: SocketIOClient.Socket, event: FeedReducerState["emittedEvent"]) => void;
 };
 
 //Communicates With Socket.io
 
-const unconfiguredsocketService = (
-	io: SocketIOClientStatic,
-	dispatch: Dispatch
-): SocketService => ({
-	socket: null,
-	event: null,
-	isConnected() {
-		return this.socket ? true : false;
-	},
+const unconfiguredsocketService = (io: SocketIOClientStatic): SocketService => ({
 	connect(socketUri: string) {
-		this.socket = io(socketUri);
-		this.socket.on("connect", () => console.log("Client connected!"));
+		try {
+			const socket = io(socketUri);
+			return new Promise(res => {
+				socket && socket.on("connect", () => console.log("Client connected!"));
+				res(socket);
+			});
+		} catch (e) {
+			console.log(e);
+			return Promise.reject(null);
+		}
 	},
-	listenForAndStoreEchoes(event: string) {
+	/* listenForAndStoreEchoes(event: string) {
 		if (!this.socket) {
 			console.error("No socket connected!");
 			return;
@@ -53,13 +48,19 @@ const unconfiguredsocketService = (
 
 			dispatch(addSingleEcho(echo as Echo));
 		});
-	},
-	close() {
-		console.log(`Stops listening for "${this.event}" events.`);
-		this.socket?.close();
+	}, */
+	close(socket, event) {
+		event
+			? console.log(`Stops listening for "${event}" events.`)
+			: console.error("Can't find any event!");
+		socket
+			? socket.close()
+			: console.error(
+					"Unable to close socket connection because socket was null or undefined."
+			  );
 	},
 });
 
-const socketService = unconfiguredsocketService(io, store.dispatch);
+const socketService = unconfiguredsocketService(io);
 
 export default socketService;

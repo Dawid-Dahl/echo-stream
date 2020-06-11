@@ -2,7 +2,6 @@ import {FeedActionTypes} from "../actions/feedActions";
 
 export type FeedReducerState = {
 	isFeedActive: boolean;
-	fetchSpeed: number;
 	hashtag: string | null;
 	emittedEvent: string | null;
 	error: Error | string | null;
@@ -10,7 +9,6 @@ export type FeedReducerState = {
 
 const initialState: FeedReducerState = {
 	isFeedActive: false,
-	fetchSpeed: 5000,
 	hashtag: null,
 	emittedEvent: null,
 	error: null,
@@ -26,11 +24,14 @@ export const feedReducer = (
 		case `START_FEED_REJECTED`:
 			return {...state, isFeedActive: false, error: action.message};
 		case `STOP_FEED_FULFILLED`:
-			return {...state, isFeedActive: false, error: null};
+			return {
+				...state,
+				isFeedActive: false,
+				emittedEvent: null,
+				error: null,
+			};
 		case `STOP_FEED_REJECTED`:
 			return {...state, isFeedActive: false, error: action.message};
-		case "SET_FETCH_SPEED":
-			return {...state, fetchSpeed: action.speedMs};
 		case "SET_HASHTAG":
 			return {...state, hashtag: action.hashtag};
 		case "SET_EMITTED_EVENT":

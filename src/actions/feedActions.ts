@@ -46,12 +46,6 @@ export const stopFeedRejected = (message: string) =>
 		message,
 	} as const);
 
-export const setFetchSpeed = (speedMs: number) =>
-	({
-		type: "SET_FETCH_SPEED",
-		speedMs,
-	} as const);
-
 export const setHashtag = (hashtag: Hashtag) =>
 	({
 		type: "SET_HASHTAG",
@@ -71,6 +65,5 @@ export type FeedActionTypes =
 	| ReturnType<typeof stopFeed>
 	| ReturnType<typeof stopFeedFulfilled>
 	| ReturnType<typeof stopFeedRejected>
-	| ReturnType<typeof setFetchSpeed>
 	| ReturnType<typeof setHashtag>
 	| ReturnType<typeof setEmittedEvent>;
