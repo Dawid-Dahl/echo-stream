@@ -1,17 +1,4 @@
 import {Hashtag, ParsedJsonResponsePayload} from "../types/types";
-import {config} from "dotenv";
-import {ActionCreator} from "redux";
-
-config({
-	path: "../../.env",
-});
-
-if (!process.env.SERVER_URL) throw new Error("Can't find server URL enviroment variable");
-
-const actionCreatorFactory = <T, U>(type: T) => (payload: U) => ({
-	type,
-	payload,
-});
 
 export const startFeed = (hashtag: Hashtag) =>
 	({

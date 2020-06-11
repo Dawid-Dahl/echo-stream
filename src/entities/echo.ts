@@ -6,11 +6,11 @@ const unconfiguredEcho = (generateId: () => string) => ({
 		sourceId: string,
 		text: string,
 		author: string,
-		sourceDate: Date | string,
+		sourceDate: string,
 		sourceLikesFavorites: number,
 		profileImageUrl?: string,
-		sourceLink?: string,
 		mediaUrl?: string,
+		sourceLink?: string,
 		likes: number = 0
 	): Echo {
 		return {
@@ -22,8 +22,8 @@ const unconfiguredEcho = (generateId: () => string) => ({
 			date: Date.now(),
 			sourceDate,
 			sourceLikesFavorites,
-			sourceLink,
 			mediaUrl,
+			sourceLink,
 			profileImageUrl,
 			platform: "twitter",
 		};

@@ -13,9 +13,9 @@ import {Hashtag, JsonResponse, ParsedJsonResponsePayload} from "../types/types";
 import socketService from "../utils/socketService";
 import {subscribe} from "./socketGenerators";
 import {
-	openSocketConnectionRejected,
 	openSocketConnection,
 	closeSocketConnection,
+	closeSocketConnectionRejected,
 } from "../actions/socketActions";
 import {getEmittedEvent, _select} from "./selectors";
 
@@ -71,7 +71,8 @@ function* workerSocketListen(socket: SocketIOClient.Socket) {
 	while (true) {
 		const action:
 			| ReturnType<typeof openSocketConnection>
-			| ReturnType<typeof closeSocketConnection> = yield take(channel);
+			| ReturnType<typeof closeSocketConnection>
+			| ReturnType<typeof closeSocketConnectionRejected> = yield take(channel);
 
 		if (action.type === "CLOSE_SOCKET_CONNECTION") socketService.close(socket, emittedEvent);
 

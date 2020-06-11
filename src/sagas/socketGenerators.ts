@@ -3,7 +3,11 @@ import {_select, getEmittedEvent} from "./selectors";
 import echoConverter from "../utils/echoConverter";
 import {Echo} from "../components/Echo";
 import {addSingleEcho} from "../actions/echoActions";
-import {closeSocketConnection, openSocketConnection} from "../actions/socketActions";
+import {
+	closeSocketConnection,
+	openSocketConnection,
+	openSocketConnectionRejected,
+} from "../actions/socketActions";
 
 export function* subscribe(socket: SocketIOClient.Socket) {
 	const emittedEvent = yield* _select(getEmittedEvent);
@@ -19,6 +23,9 @@ export function* subscribe(socket: SocketIOClient.Socket) {
 		socket.on(emittedEvent, storeAsEcho);
 		socket.on("connect", () => emit(openSocketConnection(socket)));
 		socket.on("disconnect", () => emit(closeSocketConnection()));
+		socket.on("connect_error", () =>
+			emit(openSocketConnectionRejected("Socket connection couldn't be established."))
+		);
 
 		return () => {
 			socket.close();

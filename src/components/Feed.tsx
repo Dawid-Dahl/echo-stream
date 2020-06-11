@@ -1,14 +1,11 @@
-import React, {useEffect} from "react";
+import React from "react";
 import styled from "styled-components";
 import {RootState} from "../store";
 import Echo from "./Echo";
 import FeedHeader from "./FeedHeader";
-import useUpdateFeed from "../customHooks/useUpdateFeed";
 import {useSelector} from "react-redux";
 import WelcomeMessage from "./WelcomeMessage";
-import socketService from "../utils/socketService";
 import {config} from "dotenv";
-import {Platforms} from "../types/enums";
 
 config({
 	path: "../../.env",
@@ -18,24 +15,7 @@ type Props = {};
 
 const Feed: React.FC<Props> = () => {
 	const echoes = useSelector((state: RootState) => state.echoReducer.echoes);
-	const {hashtag, isFeedActive} = useSelector((state: RootState) => state.feedReducer);
-
-	/* useEffect(() => {
-		if (isFeedActive) {
-			if (socketService.isConnected()) {
-				if (hashtag)
-					socketService.listenForAndStoreEchoes(`${Platforms.twitter}_${hashtag}`);
-			} else {
-				socketService.connect(process.env.SERVER_URL!);
-				if (hashtag)
-					socketService.listenForAndStoreEchoes(`${Platforms.twitter}_${hashtag}`);
-			}
-		} else {
-			if (hashtag) {
-				socketService.close();
-			}
-		}
-	}, [isFeedActive, hashtag]); */
+	const {hashtag} = useSelector((state: RootState) => state.feedReducer);
 
 	return (
 		<Wrapper>

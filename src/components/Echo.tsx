@@ -10,7 +10,7 @@ export type Echo = {
 	sourceLikesFavorites: number;
 	author: string;
 	date: number;
-	sourceDate: Date | string;
+	sourceDate: string;
 	sourceLink?: string;
 	mediaUrl?: string;
 	profileImageUrl?: string;

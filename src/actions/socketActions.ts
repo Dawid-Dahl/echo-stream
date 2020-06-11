@@ -17,11 +17,6 @@ export const closeSocketConnection = () =>
 		type: "CLOSE_SOCKET_CONNECTION",
 	} as const);
 
-export const closeSocketConnectionFulfilled = () =>
-	({
-		type: "CLOSE_SOCKET_CONNECTION_FULFILLED",
-	} as const);
-
 export const closeSocketConnectionRejected = () =>
 	({
 		type: "CLOSE_SOCKET_CONNECTION_REJECTED",
@@ -31,5 +26,4 @@ export type SocketActionTypes =
 	| ReturnType<typeof openSocketConnection>
 	| ReturnType<typeof openSocketConnectionRejected>
 	| ReturnType<typeof closeSocketConnection>
-	| ReturnType<typeof closeSocketConnectionFulfilled>
 	| ReturnType<typeof closeSocketConnectionRejected>;
