@@ -18,23 +18,23 @@ describe("echoConverter", () => {
 		expect(echo).toBeNull();
 	});
 
-	it("should return null if given improper platform name as first arg", () => {
+	/* it("should return null if given improper platform name as first arg", () => {
 		const res = echoConverter("twittter" as any, tweetWithoutMedia);
 		expect(res).toBeNull();
-	});
+	}); */
 
 	describe("echo without media", () => {
 		it("should return an echo given twitter data with no media", () => {
 			const unmockedEchoWithoutMedia = echoConverter("twitter", tweetWithoutMedia) as Echo;
-			console.log("UNMOCKED WITHOUT MEDIA", unmockedEchoWithoutMedia);
 			const echo = mockIdsAndDates(unmockedEchoWithoutMedia);
 
 			expect(echo).toEqual({
 				id: "123",
 				sourceId: "1271062275340873730",
 				text: "TESTTESTTEST #test123456",
-				likes: 0,
+				echoLikes: 0,
 				author: "Nagarjuna",
+				authorScreenName: "AryaNagarjuna",
 				date: 1591879841712,
 				sourceDate: "1591879836293",
 				sourceLikesFavorites: 0,
@@ -46,7 +46,7 @@ describe("echoConverter", () => {
 	});
 
 	describe("echo with uploaded image", () => {
-		it("should return an echo given twitter data with uploaded image", () => {
+		it("should return an echo given twitter data with an uploaded image", () => {
 			const unmockedEchoWithOwnUploadedImage = echoConverter(
 				"twitter",
 				tweetWithUploadedImage
@@ -57,8 +57,9 @@ describe("echoConverter", () => {
 				id: "123",
 				sourceId: "1271062275340873730",
 				text: "TESTWITHIMAGE #test123456 https://t.co/x8ehyquajR",
-				likes: 0,
+				echoLikes: 0,
 				author: "Nagarjuna",
+				authorScreenName: "AryaNagarjuna",
 				date: 1591879841712,
 				sourceDate: "1591879836293",
 				sourceLikesFavorites: 0,
@@ -68,5 +69,9 @@ describe("echoConverter", () => {
 				platform: "twitter",
 			});
 		});
+	});
+
+	describe("echo with linked image", () => {
+		it("should return an echo given twitter data with a linked image", () => {});
 	});
 });

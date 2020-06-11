@@ -1,32 +1,42 @@
 import {Echo} from "../components/Echo";
 import {generateId} from "../utils/utils";
+import {SocialMediaPlatforms} from "../types/types";
+
+export const defaultEcho: Echo = {
+	id: "0",
+	sourceId: "0",
+	text: "",
+	echoLikes: 0,
+	author: "",
+	authorScreenName: "",
+	date: 0,
+	sourceDate: "",
+	sourceLikesFavorites: 0,
+	profileImageUrl: "",
+	platform: "twitter",
+};
+
+export type EchoConstructorArg = {
+	sourceId: string;
+	text: string;
+	author: string;
+	authorScreenName: string;
+	sourceDate: string;
+	sourceLikesFavorites: number;
+	profileImageUrl: string;
+	sourceLink: string;
+	echoLikes: number;
+	platform: SocialMediaPlatforms;
+	mediaUrl?: string;
+};
 
 const unconfiguredEcho = (generateId: () => string) => ({
-	from(
-		sourceId: string,
-		text: string,
-		author: string,
-		sourceDate: string,
-		sourceLikesFavorites: number,
-		profileImageUrl?: string,
-		mediaUrl?: string,
-		sourceLink?: string,
-		likes: number = 0
-	): Echo {
-		return {
+	from(echoConstructorArg: EchoConstructorArg): Echo {
+		return Object.entries(echoConstructorArg).reduce((acc, [k, v]) => ({...acc, [k]: v}), {
+			...defaultEcho,
 			id: generateId(),
-			sourceId,
-			text,
-			likes,
-			author,
 			date: Date.now(),
-			sourceDate,
-			sourceLikesFavorites,
-			mediaUrl,
-			sourceLink,
-			profileImageUrl,
-			platform: "twitter",
-		};
+		});
 	},
 });
 

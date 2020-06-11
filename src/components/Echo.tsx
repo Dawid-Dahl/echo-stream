@@ -6,9 +6,10 @@ export type Echo = {
 	id: string;
 	sourceId: string;
 	text: string;
-	likes: number;
+	echoLikes: number;
 	sourceLikesFavorites: number;
 	author: string;
+	authorScreenName: string;
 	date: number;
 	sourceDate: string;
 	sourceLink?: string;
@@ -19,11 +20,11 @@ export type Echo = {
 
 type Props = Omit<Echo, "id">;
 
-const Echo: React.FC<Props> = ({text, likes, author, date}) => {
+const Echo: React.FC<Props> = ({text, sourceLikesFavorites, author, date}) => {
 	return (
 		<Wrapper>
 			<h3>{text}</h3>
-			<p>{likes}</p>
+			<p>{sourceLikesFavorites}</p>
 			<p>{author}</p>
 			<p>{date}</p>
 		</Wrapper>

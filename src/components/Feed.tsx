@@ -29,8 +29,9 @@ const Feed: React.FC<Props> = () => {
 						text={echo.text}
 						sourceId={echo.sourceId}
 						sourceDate={echo.sourceDate}
-						likes={echo.likes}
+						echoLikes={echo.echoLikes}
 						author={echo.author}
+						authorScreenName={echo.authorScreenName}
 						date={echo.date}
 						platform={echo.platform}
 						sourceLikesFavorites={echo.sourceLikesFavorites}

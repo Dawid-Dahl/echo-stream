@@ -3,6 +3,7 @@ import {Echo} from "../components/Echo";
 import echo from "../entities/echo";
 import {getMediaUrl} from "./dataGetters";
 import {twitterData} from "./jestTestData";
+import {constructTwitterUrl} from "./utils";
 
 const echoConverter = (
 	platform: SocialMediaPlatforms,
@@ -13,16 +14,20 @@ const echoConverter = (
 			const media_url = getMediaUrl<object[], string | undefined>(data);
 
 			const {id_str, text, timestamp_ms, favorite_count} = data.tweet;
-			const {name, profile_image_url} = data.tweet.user;
-			return echo.from(
-				id_str,
-				text ?? "",
-				name,
-				timestamp_ms,
-				favorite_count,
-				profile_image_url,
-				media_url
-			);
+			const {name, screen_name, profile_image_url} = data.tweet.user;
+			return echo.from({
+				sourceId: id_str,
+				text: text ?? "",
+				author: name,
+				authorScreenName: screen_name,
+				sourceDate: timestamp_ms,
+				sourceLikesFavorites: favorite_count,
+				profileImageUrl: profile_image_url,
+				sourceLink: constructTwitterUrl(screen_name, id_str),
+				echoLikes: 0,
+				platform: platform,
+				mediaUrl: media_url,
+			});
 		} catch (e) {
 			console.log(e);
 			return null;

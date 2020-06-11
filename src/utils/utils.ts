@@ -1,6 +1,7 @@
 import {JsonResponse} from "../types/types";
 import {Stream} from "twit";
 import {Request} from "express-serve-static-core";
+import {Echo} from "../components/Echo";
 
 export const range = (start: number, end: number): number[] =>
 	end <= start ? [end] : [...range(start, end - 1), end];
@@ -30,3 +31,11 @@ export const unconfiguredSetLocalNodeState = (req: Request) => (
 	req.app.locals.stream = stream;
 	req.app.locals.hashtag = hashtag;
 };
+
+export const constructTwitterUrl = (
+	authorScreenName: Echo["authorScreenName"],
+	sourceId: Echo["sourceId"]
+) =>
+	authorScreenName && sourceId
+		? `https://twitter.com/${authorScreenName}/status/${sourceId}`
+		: "";
