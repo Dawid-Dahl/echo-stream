@@ -2,7 +2,9 @@ import {Echo} from "../components/Echo";
 import {generateId} from "../utils/utils";
 import {SocialMediaPlatforms} from "../types/types";
 
-export const defaultEcho: Echo = {
+export type DefaultEcho = typeof defaultEcho;
+
+export const defaultEcho = {
 	id: "0",
 	sourceId: "0",
 	text: "",
@@ -14,7 +16,7 @@ export const defaultEcho: Echo = {
 	sourceLikesFavorites: 0,
 	profileImageUrl: "",
 	platform: "twitter",
-};
+} as const;
 
 export type EchoConstructorArg = {
 	sourceId: string;

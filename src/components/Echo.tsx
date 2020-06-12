@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import {SocialMediaPlatforms} from "../types/types";
 
-export type Echo = {
+export type Echo = Readonly<{
 	id: string;
 	sourceId: string;
 	text: string;
@@ -16,7 +16,7 @@ export type Echo = {
 	mediaUrl?: string;
 	profileImageUrl?: string;
 	platform: SocialMediaPlatforms;
-};
+}>;
 
 type Props = Omit<Echo, "id">;
 

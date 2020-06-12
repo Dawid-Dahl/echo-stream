@@ -3,9 +3,13 @@ import {twitterData} from "./jestTestData";
 import {Echo} from "../components/Echo";
 
 const mockIdsAndDates = (echo: Echo): Echo => {
+	// @ts-ignore
 	echo.id = "123";
+	// @ts-ignore
 	echo.sourceId = "1271062275340873730";
+	// @ts-ignore
 	echo.date = 1591879841712;
+	// @ts-ignore
 	echo.sourceDate = "1591879836293";
 	return echo;
 };
