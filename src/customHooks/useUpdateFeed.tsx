@@ -3,18 +3,18 @@ import {RootState} from "../store";
 import {useSelector} from "react-redux";
 
 const useUpdateFeed = () => {
-	const {fetchSpeed, isFeedActive} = useSelector((state: RootState) => state.feedReducer);
+	const {isFeedActive} = useSelector((state: RootState) => state.feedReducer);
 
 	useEffect(() => {
 		if (isFeedActive) {
 			const clear = setInterval(() => {
 				console.log("Updating");
-			}, fetchSpeed);
+			});
 			return () => {
 				clearInterval(clear);
 			};
 		}
-	}, [fetchSpeed, isFeedActive]);
+	}, [isFeedActive]);
 };
 
 export default useUpdateFeed;

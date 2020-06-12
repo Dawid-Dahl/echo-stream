@@ -12,7 +12,7 @@ const echoConverter = (
 ): Echo | DefaultEcho => {
 	if (platform === "twitter") {
 		try {
-			const media_url = getMediaUrl<object[], string | undefined>(data);
+			const media_url = getMediaUrl<ValueOf<typeof twitterData>, string | undefined>(data);
 
 			const {id_str, text, timestamp_ms, favorite_count} = data.tweet;
 			const {name, screen_name, profile_image_url} = data.tweet.user;

@@ -1,5 +1,6 @@
 import {SocialMediaPlatforms} from "../types/types";
 import {defaultEcho} from "./echo";
+import {Echo} from "../components/Echo";
 
 type DefaultEchoKeys = typeof defaultEcho;
 
@@ -27,5 +28,5 @@ export type EchoConstructorArg = {
 
 export type EchoConstructorConfig = {
 	generateId: () => string;
-	echoConstructorArgKeys: string[];
+	echoConstructorArgKeys: Array<keyof EchoConstructorArg>;
 };

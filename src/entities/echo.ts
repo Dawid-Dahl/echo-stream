@@ -2,6 +2,8 @@ import {Echo} from "../components/Echo";
 import {generateId} from "../utils/utils";
 import {EchoConstructorArg, EchoConstructorConfig} from "./echoTypes";
 
+export const myFn = () => 42;
+
 export const defaultEcho = {
 	id: "0",
 	sourceId: "0",
@@ -34,7 +36,7 @@ const unconfiguredEcho = (config: EchoConstructorConfig) => ({
 	},
 });
 
-const echoConstructorArgKeys = Object.keys(defaultEcho) as Array<keyof Echo>;
+const echoConstructorArgKeys = Object.keys(defaultEcho) as Array<keyof EchoConstructorArg>;
 
 const echo = unconfiguredEcho({
 	generateId,
