@@ -1,14 +1,15 @@
 import {SocialMediaPlatforms, ValueOf} from "../types/types";
 import {Echo} from "../components/Echo";
-import echo from "../entities/echo";
+import echo, {defaultEcho} from "../entities/echo";
 import {getMediaUrl} from "./dataGetters";
 import {twitterData} from "./jestTestData";
 import {constructTwitterUrl} from "./utils";
+import {DefaultEcho} from "../entities/echoTypes";
 
 const echoConverter = (
 	platform: SocialMediaPlatforms,
 	data: ValueOf<typeof twitterData>
-): Echo | null => {
+): Echo | DefaultEcho => {
 	if (platform === "twitter") {
 		try {
 			const media_url = getMediaUrl<object[], string | undefined>(data);
@@ -30,11 +31,11 @@ const echoConverter = (
 			});
 		} catch (e) {
 			console.log(e);
-			return null;
+			return defaultEcho as DefaultEcho;
 		}
 	} else {
 		console.log("No platform selected");
-		return null;
+		return defaultEcho as DefaultEcho;
 	}
 };
 

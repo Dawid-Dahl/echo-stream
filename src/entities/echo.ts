@@ -1,8 +1,6 @@
 import {Echo} from "../components/Echo";
 import {generateId} from "../utils/utils";
-import {SocialMediaPlatforms} from "../types/types";
-
-export type DefaultEcho = typeof defaultEcho;
+import {EchoConstructorArg, EchoConstructorConfig} from "./echoTypes";
 
 export const defaultEcho = {
 	id: "0",
@@ -13,35 +11,34 @@ export const defaultEcho = {
 	authorScreenName: "",
 	date: 0,
 	sourceDate: "",
+	sourceLink: "",
 	sourceLikesFavorites: 0,
 	profileImageUrl: "",
 	platform: "twitter",
+	mediaUrl: undefined,
 } as const;
 
-export type EchoConstructorArg = {
-	sourceId: string;
-	text: string;
-	author: string;
-	authorScreenName: string;
-	sourceDate: string;
-	sourceLikesFavorites: number;
-	profileImageUrl: string;
-	sourceLink: string;
-	echoLikes: number;
-	platform: SocialMediaPlatforms;
-	mediaUrl?: string;
-};
-
-const unconfiguredEcho = (generateId: () => string) => ({
+const unconfiguredEcho = (config: EchoConstructorConfig) => ({
 	from(echoConstructorArg: EchoConstructorArg): Echo {
-		return Object.entries(echoConstructorArg).reduce((acc, [k, v]) => ({...acc, [k]: v}), {
-			...defaultEcho,
-			id: generateId(),
-			date: Date.now(),
-		});
+		return Object.entries(echoConstructorArg).reduce(
+			(acc, [k, v]) =>
+				config.echoConstructorArgKeys.includes(k as keyof EchoConstructorArg)
+					? {...acc, [k]: v}
+					: acc,
+			{
+				...defaultEcho,
+				id: config.generateId(),
+				date: Date.now(),
+			}
+		);
 	},
 });
 
-const echo = unconfiguredEcho(generateId);
+const echoConstructorArgKeys = Object.keys(defaultEcho) as Array<keyof Echo>;
+
+const echo = unconfiguredEcho({
+	generateId,
+	echoConstructorArgKeys: echoConstructorArgKeys,
+});
 
 export default echo;

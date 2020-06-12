@@ -12,9 +12,9 @@ export type Echo = Readonly<{
 	authorScreenName: string;
 	date: number;
 	sourceDate: string;
-	sourceLink?: string;
-	mediaUrl?: string;
-	profileImageUrl?: string;
+	sourceLink: string | undefined;
+	mediaUrl: string | undefined;
+	profileImageUrl: string | undefined;
 	platform: SocialMediaPlatforms;
 }>;
 

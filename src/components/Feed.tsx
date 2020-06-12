@@ -29,6 +29,7 @@ const Feed: React.FC<Props> = () => {
 						text={echo.text}
 						sourceId={echo.sourceId}
 						sourceDate={echo.sourceDate}
+						sourceLink={echo.sourceLink}
 						echoLikes={echo.echoLikes}
 						author={echo.author}
 						authorScreenName={echo.authorScreenName}
@@ -36,6 +37,7 @@ const Feed: React.FC<Props> = () => {
 						platform={echo.platform}
 						sourceLikesFavorites={echo.sourceLikesFavorites}
 						profileImageUrl={echo.profileImageUrl}
+						mediaUrl={echo.mediaUrl}
 					/>
 				))
 			)}

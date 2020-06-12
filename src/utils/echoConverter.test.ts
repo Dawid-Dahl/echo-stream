@@ -1,6 +1,12 @@
 import echoConverter from "./echoConverter";
 import {twitterData} from "./jestTestData";
 import {Echo} from "../components/Echo";
+import {expectedEcho} from "../entities/echo.test";
+import {testObj} from "./testObj";
+
+const mockedTestObj = jest.genMockFromModule<typeof testObj>("./testObj");
+
+console.log("MOCKED FROM JEST: ", (mockedTestObj.cool = false));
 
 const mockIdsAndDates = (echo: Echo): Echo => {
 	// @ts-ignore
@@ -11,15 +17,24 @@ const mockIdsAndDates = (echo: Echo): Echo => {
 	echo.date = 1591879841712;
 	// @ts-ignore
 	echo.sourceDate = "1591879836293";
+	// @ts-ignore
+	echo.sourceLink = "https://twitter.com/AryaNagarjuna/status/1271062275340873730";
 	return echo;
 };
 
 describe("echoConverter", () => {
 	const {tweetWithoutMedia, tweetWithUploadedImage} = twitterData;
 
-	it("should return null if given the wrong data", () => {
+	it("should return a default echo if given the wrong data", () => {
 		const echo = echoConverter("twitter", {wrongData: 123} as any) as Echo;
-		expect(echo).toBeNull();
+
+		jest.mock;
+		// @ts-ignore
+		echo.id = "123";
+		// @ts-ignore
+		echo.date = 1591879841712;
+
+		expect(echo).toEqual(expectedEcho.defaultEcho);
 	});
 
 	/* it("should return null if given improper platform name as first arg", () => {
@@ -32,20 +47,7 @@ describe("echoConverter", () => {
 			const unmockedEchoWithoutMedia = echoConverter("twitter", tweetWithoutMedia) as Echo;
 			const echo = mockIdsAndDates(unmockedEchoWithoutMedia);
 
-			expect(echo).toEqual({
-				id: "123",
-				sourceId: "1271062275340873730",
-				text: "TESTTESTTEST #test123456",
-				echoLikes: 0,
-				author: "Nagarjuna",
-				authorScreenName: "AryaNagarjuna",
-				date: 1591879841712,
-				sourceDate: "1591879836293",
-				sourceLikesFavorites: 0,
-				profileImageUrl:
-					"http://pbs.twimg.com/profile_images/1253345515/Nagarjuna_normal.jpg",
-				platform: "twitter",
-			});
+			expect(echo).toEqual(expectedEcho.withoutMedia);
 		});
 	});
 
@@ -55,23 +57,10 @@ describe("echoConverter", () => {
 				"twitter",
 				tweetWithUploadedImage
 			) as Echo;
+
 			const echo = mockIdsAndDates(unmockedEchoWithOwnUploadedImage);
 
-			expect(echo).toEqual({
-				id: "123",
-				sourceId: "1271062275340873730",
-				text: "TESTWITHIMAGE #test123456 https://t.co/x8ehyquajR",
-				echoLikes: 0,
-				author: "Nagarjuna",
-				authorScreenName: "AryaNagarjuna",
-				date: 1591879841712,
-				sourceDate: "1591879836293",
-				sourceLikesFavorites: 0,
-				mediaUrl: "http://pbs.twimg.com/media/EaO2qZEXQAEWPpx.jpg",
-				profileImageUrl:
-					"http://pbs.twimg.com/profile_images/1253345515/Nagarjuna_normal.jpg",
-				platform: "twitter",
-			});
+			expect(echo).toEqual(expectedEcho.withMedia);
 		});
 	});
 
