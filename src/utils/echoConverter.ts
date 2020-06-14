@@ -2,7 +2,7 @@ import {SocialMediaPlatforms, ValueOf} from "../types/types";
 import {Echo} from "../components/Echo";
 import echo, {defaultEcho} from "../entities/echo";
 import {getMediaUrl} from "./getMediaUrl";
-import {twitterData} from "./jestTestData";
+import {twitterData} from "./mockData/jestTestData";
 import {constructTwitterUrl} from "./utils";
 import {DefaultEcho} from "../entities/echoTypes";
 
@@ -12,7 +12,7 @@ const echoConverter = (
 ): Echo | DefaultEcho => {
 	if (platform === "twitter") {
 		try {
-			const media_url = getMediaUrl(data);
+			const media_url = getMediaUrl(platform, data);
 
 			const {id_str, text, timestamp_ms, favorite_count} = data.tweet;
 			const {name, screen_name, profile_image_url} = data.tweet.user;

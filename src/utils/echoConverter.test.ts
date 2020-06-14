@@ -1,5 +1,5 @@
 import echoConverter from "./echoConverter";
-import {twitterData} from "./jestTestData";
+import {twitterData} from "./mockData/jestTestData";
 import {Echo} from "../components/Echo";
 import {expectedEcho} from "../entities/echo.test";
 
