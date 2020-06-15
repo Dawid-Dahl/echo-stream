@@ -17,6 +17,31 @@ type GetMediaUrlConfig = {
 
 const config = {
 	twitter: [
+		//check for the presence of "extended_tweet"
+		(data: any) => {
+			try {
+				const extendedMedia = R.view<any, TwitterMedia | undefined>(
+					R.lensPath(["tweet", "extended_tweet", "media"]),
+					data
+				);
+
+				if (!extendedMedia) return;
+
+				return extendedMedia[0].type === "video"
+					? (extendedMedia[0] as TwitterMediaVideo).video_info.variants.find(
+							variant => variant.bitrate === 2176000
+					  )?.url
+					: extendedMedia[0].type === "photo"
+					? (extendedMedia[0] as TwitterMediaPhoto).media_url
+					: extendedMedia[0].type === "animated_gif"
+					? (extendedMedia[0] as TwitterMediaGif).video_info.variants.find(
+							variant => variant.bitrate === 0
+					  )?.url
+					: undefined;
+			} catch (e) {
+				return;
+			}
+		},
 		//own uploaded photo or video
 		(data: any) => {
 			try {

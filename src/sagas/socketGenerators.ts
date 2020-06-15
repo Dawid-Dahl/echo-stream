@@ -19,6 +19,8 @@ export function* subscribe(socket: SocketIOClient.Socket) {
 
 	return eventChannel(emit => {
 		const storeAsEcho = (data: any) => {
+			console.log(data);
+			console.log(JSON.stringify(data));
 			const echo = echoConverter("twitter", data);
 			emit(addSingleEcho(echo as Echo));
 		};

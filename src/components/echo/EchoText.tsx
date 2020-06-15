@@ -8,7 +8,7 @@ type Props = {
 const EchoText: React.FC<Props> = ({text}) => {
 	return (
 		<>
-			<div></div>
+			<Wrapper>{text.length < 70 ? <h2>{text}</h2> : <p>{text}</p>}</Wrapper>
 		</>
 	);
 };
@@ -16,7 +16,18 @@ const EchoText: React.FC<Props> = ({text}) => {
 export default EchoText;
 
 const Wrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	color: white;
+	width: 100%;
+
+	p {
+		padding: 1em 1em;
+		margin: 0;
+		text-align: center;
+	}
+
+	h2 {
+		padding: 1em 1em;
+		margin: 0;
+		text-align: center;
+	}
 `;

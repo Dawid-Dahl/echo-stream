@@ -1,5 +1,5 @@
 export const socialMediaIcons = {
-	twitter: "<img src='https://img.icons8.com/material/48/000000/twitter-squared.png'/>",
-	instagram: "<img src='https://img.icons8.com/material/48/000000/instagram-new--v1.png'/>",
-	facebook: "<img src='https://img.icons8.com/material/48/000000/facebook--v1.png'/>",
+	twitter: "https://img.icons8.com/material-outlined/48/000000/twitter-squared.png",
+	instagram: "https://img.icons8.com/material-outlined/48/000000/instagram-new.png",
+	facebook: "https://img.icons8.com/material-outlined/48/000000/facebook-new.png",
 };

@@ -3,12 +3,20 @@ import styled from "styled-components";
 
 type Props = {
 	mediaUrl: string | undefined;
+	sourceLink: string | undefined;
 };
 
-const EchoMedia: React.FC<Props> = ({mediaUrl}) => {
+const EchoMedia: React.FC<Props> = ({mediaUrl, sourceLink}) => {
+	console.log(mediaUrl);
 	return (
 		<>
-			<div></div>
+			<Wrapper>
+				{mediaUrl && (
+					<a href={sourceLink} target="_blank" rel="noopener noreferrer">
+						<img src={mediaUrl} alt="video or image" />
+					</a>
+				)}
+			</Wrapper>
 		</>
 	);
 };
@@ -16,7 +24,10 @@ const EchoMedia: React.FC<Props> = ({mediaUrl}) => {
 export default EchoMedia;
 
 const Wrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	img {
+		width: 100%;
+		max-height: 25em;
+		object-fit: cover;
+		cursor: pointer;
+	}
 `;

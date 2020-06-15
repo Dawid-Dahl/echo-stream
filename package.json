@@ -21,6 +21,7 @@
 	"homepage": "https://github.com/Dawid-Dahl/dynamic-twitter-feed#readme",
 	"dependencies": {
 		"cors": "^2.8.5",
+		"dayjs": "^1.8.28",
 		"dotenv": "^8.2.0",
 		"errorhandler": "^1.5.1",
 		"express": "^4.17.1",

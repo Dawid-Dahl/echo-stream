@@ -4,6 +4,12 @@ import {set, lensPath} from "rambda";
 
 describe("the getMediaUrl fn, which extracts the appropriate media from the supplied data source", () => {
 	describe("the happy paths", () => {
+		it("it should get mediaURL from tweet with an extended_tweet field", () => {
+			expect(getMediaUrl("twitter", twitterData.tweetWithExtendedTweet)).toBe(
+				"http://pbs.twimg.com/media/EakLuFoWoAMo8ez.jpg"
+			);
+		});
+
 		it("it should get mediaURL from tweet with own uploaded video", () => {
 			expect(getMediaUrl("twitter", twitterData.tweetWithOwnUploadedVideo)).toBe(
 				"https://video.twimg.com/ext_tw_video/1271062164888043521/pu/vid/1280x720/jXLW_dZTcbxDhG85.mp4?tag=10"

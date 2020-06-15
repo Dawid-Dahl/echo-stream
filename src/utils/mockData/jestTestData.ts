@@ -809,6 +809,208 @@ export const twitterData = {
 			timestamp_ms: "1591879386416",
 		},
 	},
+	tweetWithExtendedTweet: {
+		tweet: {
+			created_at: "Mon Jun 15 16:07:05 +0000 2020",
+			id: 1272561273721557000,
+			id_str: "1272561273721556997",
+			text:
+				"#TongueOutMonday\n#Dogs #DogsofTwitter \n\nKenzie in the Peak District today. He's guarding a piece of a jet engine fr… https://t.co/Q0ldGxmyZQ",
+			display_text_range: [0, 140],
+			source:
+				'<a href="http://twitter.com/download/android" rel="nofollow">Twitter for Android</a>',
+			truncated: true,
+			in_reply_to_status_id: null,
+			in_reply_to_status_id_str: null,
+			in_reply_to_user_id: null,
+			in_reply_to_user_id_str: null,
+			in_reply_to_screen_name: null,
+			user: {
+				id: 2484263847,
+				id_str: "2484263847",
+				name: "🇬🇧 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Chris 🏴󠁧󠁢󠁥󠁮󠁧󠁿 🇬🇧",
+				screen_name: "RabbitTrousers",
+				location: "Sunny Derbyshire ",
+				url: null,
+				description:
+					"Loves animals and hates people, especially Liar Politicians and the EU.\nCan be contrary at times. \nRequires good spelling in any abuse I get. \n#FBPE Nemesis",
+				translator_type: "none",
+				protected: false,
+				verified: false,
+				followers_count: 555,
+				friends_count: 2982,
+				listed_count: 3,
+				favourites_count: 7433,
+				statuses_count: 6733,
+				created_at: "Mon Apr 14 14:15:19 +0000 2014",
+				utc_offset: null,
+				time_zone: null,
+				geo_enabled: false,
+				lang: null,
+				contributors_enabled: false,
+				is_translator: false,
+				profile_background_color: "C0DEED",
+				profile_background_image_url: "http://abs.twimg.com/images/themes/theme1/bg.png",
+				profile_background_image_url_https:
+					"https://abs.twimg.com/images/themes/theme1/bg.png",
+				profile_background_tile: false,
+				profile_link_color: "1DA1F2",
+				profile_sidebar_border_color: "C0DEED",
+				profile_sidebar_fill_color: "DDEEF6",
+				profile_text_color: "333333",
+				profile_use_background_image: true,
+				profile_image_url:
+					"http://pbs.twimg.com/profile_images/1106287939011706880/AFefGt-4_normal.jpg",
+				profile_image_url_https:
+					"https://pbs.twimg.com/profile_images/1106287939011706880/AFefGt-4_normal.jpg",
+				profile_banner_url: "https://pbs.twimg.com/profile_banners/2484263847/1442055055",
+				default_profile: true,
+				default_profile_image: false,
+				following: null,
+				follow_request_sent: null,
+				notifications: null,
+			},
+			geo: null,
+			coordinates: null,
+			place: null,
+			contributors: null,
+			is_quote_status: false,
+			extended_tweet: {
+				full_text:
+					"#TongueOutMonday\n#Dogs #DogsofTwitter \n\nKenzie in the Peak District today. He's guarding a piece of a jet engine from an RAF plane that crashed on Kinder Scout in 1954.\n\nGood boy 🐶🐕\u200d🦺🐾 https://t.co/Lk3qlKt9dh",
+				display_text_range: [0, 184],
+				entities: {
+					hashtags: [
+						{
+							text: "TongueOutMonday",
+							indices: [0, 16],
+						},
+						{
+							text: "Dogs",
+							indices: [17, 22],
+						},
+						{
+							text: "DogsofTwitter",
+							indices: [23, 37],
+						},
+					],
+					urls: [],
+					user_mentions: [],
+					symbols: [],
+					media: [
+						{
+							id: 1272561256122196000,
+							id_str: "1272561256122195971",
+							indices: [185, 208],
+							media_url: "http://pbs.twimg.com/media/EakLuFoWoAMo8ez.jpg",
+							media_url_https: "https://pbs.twimg.com/media/EakLuFoWoAMo8ez.jpg",
+							url: "https://t.co/Lk3qlKt9dh",
+							display_url: "pic.twitter.com/Lk3qlKt9dh",
+							expanded_url:
+								"https://twitter.com/RabbitTrousers/status/1272561273721556997/photo/1",
+							type: "photo",
+							sizes: {
+								large: {
+									w: 1153,
+									h: 2048,
+									resize: "fit",
+								},
+								thumb: {
+									w: 150,
+									h: 150,
+									resize: "crop",
+								},
+								small: {
+									w: 383,
+									h: 680,
+									resize: "fit",
+								},
+								medium: {
+									w: 676,
+									h: 1200,
+									resize: "fit",
+								},
+							},
+						},
+					],
+				},
+				extended_entities: {
+					media: [
+						{
+							id: 1272561256122196000,
+							id_str: "1272561256122195971",
+							indices: [185, 208],
+							media_url: "http://pbs.twimg.com/media/EakLuFoWoAMo8ez.jpg",
+							media_url_https: "https://pbs.twimg.com/media/EakLuFoWoAMo8ez.jpg",
+							url: "https://t.co/Lk3qlKt9dh",
+							display_url: "pic.twitter.com/Lk3qlKt9dh",
+							expanded_url:
+								"https://twitter.com/RabbitTrousers/status/1272561273721556997/photo/1",
+							type: "photo",
+							sizes: {
+								large: {
+									w: 1153,
+									h: 2048,
+									resize: "fit",
+								},
+								thumb: {
+									w: 150,
+									h: 150,
+									resize: "crop",
+								},
+								small: {
+									w: 383,
+									h: 680,
+									resize: "fit",
+								},
+								medium: {
+									w: 676,
+									h: 1200,
+									resize: "fit",
+								},
+							},
+						},
+					],
+				},
+			},
+			quote_count: 0,
+			reply_count: 0,
+			retweet_count: 0,
+			favorite_count: 0,
+			entities: {
+				hashtags: [
+					{
+						text: "TongueOutMonday",
+						indices: [0, 16],
+					},
+					{
+						text: "Dogs",
+						indices: [17, 22],
+					},
+					{
+						text: "DogsofTwitter",
+						indices: [23, 37],
+					},
+				],
+				urls: [
+					{
+						url: "https://t.co/Q0ldGxmyZQ",
+						expanded_url: "https://twitter.com/i/web/status/1272561273721556997",
+						display_url: "twitter.com/i/web/status/1…",
+						indices: [117, 140],
+					},
+				],
+				user_mentions: [],
+				symbols: [],
+			},
+			favorited: false,
+			retweeted: false,
+			possibly_sensitive: false,
+			filter_level: "low",
+			lang: "en",
+			timestamp_ms: "1592237225357",
+		},
+	},
 };
 
 const twitterMediaVideo = {
