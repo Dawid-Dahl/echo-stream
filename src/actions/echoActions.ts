@@ -1,4 +1,4 @@
-import {Echo} from "../components/Echo";
+import {Echo} from "../components/echo/Echo";
 
 export const addSingleEcho = (payload: Echo) =>
 	({

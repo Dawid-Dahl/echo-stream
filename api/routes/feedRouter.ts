@@ -4,16 +4,20 @@ import {jsonResponse, unconfiguredSetLocalNodeState} from "../../src/utils/utils
 import {Stream} from "twit";
 import {ioServer} from "../../server";
 import {Platforms} from "../../src/types/enums";
+import {restartServer} from "./api-utils/apiUtils";
 
 const feedRouter = express.Router();
 
+//global variable for Twitter stream
+let stream: Stream | null = null;
+
 feedRouter.post("/start", async (req, res) => {
 	try {
-		const setLocalNodeState = unconfiguredSetLocalNodeState(req);
-
 		const {hashtag} = req.body;
 
-		const stream = T.stream("statuses/filter", {track: hashtag ?? "#BACKUPHASHTAG"});
+		stream?.stop();
+
+		stream = T.stream("statuses/filter", {track: hashtag ?? "#BACKUPHASHTAG"});
 
 		console.log("Stream has been started.");
 
@@ -23,8 +27,6 @@ feedRouter.post("/start", async (req, res) => {
 			console.log("Emitting tweet!");
 			ioServer.emit(emittedEvent, {tweet});
 		});
-
-		setLocalNodeState(true, stream, hashtag);
 
 		res.status(200).json(
 			jsonResponse(
@@ -46,10 +48,6 @@ feedRouter.post("/start", async (req, res) => {
 
 feedRouter.get("/stop", async (req, res) => {
 	try {
-		const setLocalNodeState = unconfiguredSetLocalNodeState(req);
-
-		const stream: Stream = req.app.locals.stream;
-
 		if (!stream) {
 			res.status(404).json(
 				jsonResponse(false, JSON.stringify({message: "No stream is active."}))
@@ -61,23 +59,11 @@ feedRouter.get("/stop", async (req, res) => {
 
 		console.log("Stream has been stopped.");
 
-		setLocalNodeState(false, null, null);
-
 		res.status(200).json(
 			jsonResponse(true, JSON.stringify({message: "Stream has been stopped!"}))
 		);
 
-		setTimeout(() => {
-			process.on("exit", () => {
-				console.log("Restarting process!");
-				require("child_process").spawn(process.argv.shift(), process.argv, {
-					cwd: process.cwd(),
-					detached: true,
-					stdio: "inherit",
-				});
-			});
-			process.exit();
-		}, 1000);
+		restartServer();
 	} catch (e) {
 		console.log(e);
 		res.status(404).json(

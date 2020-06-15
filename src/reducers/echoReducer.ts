@@ -1,5 +1,5 @@
 import {EchoActionTypes} from "../actions/echoActions";
-import {Echo} from "../components/Echo";
+import {Echo} from "../components/echo/Echo";
 
 export type EchoReducerState = {
 	echoes: Echo[];

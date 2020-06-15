@@ -1,5 +1,5 @@
 import {SocialMediaPlatforms, ValueOf} from "../types/types";
-import {Echo} from "../components/Echo";
+import {Echo} from "../components/echo/Echo";
 import echo, {defaultEcho} from "../entities/echo";
 import {getMediaUrl} from "./getMediaUrl";
 import {twitterData} from "./mockData/jestTestData";

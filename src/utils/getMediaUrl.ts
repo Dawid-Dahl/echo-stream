@@ -7,12 +7,12 @@ import {
 	TwitterMediaGif,
 } from "./mockData/jestTestData";
 
-type Viewer = (data: any) => string | undefined;
+type UrlExtractor = (data: any) => string | undefined;
 
 type GetMediaUrlConfig = {
-	twitter?: Viewer[] | [];
-	instagram?: Viewer[] | [];
-	facebook?: Viewer[] | [];
+	twitter?: UrlExtractor[] | [];
+	instagram?: UrlExtractor[] | [];
+	facebook?: UrlExtractor[] | [];
 };
 
 const config = {
@@ -54,8 +54,8 @@ export const getMediaUrlUnconfigured = (config: GetMediaUrlConfig) => (
 	platform: SocialMediaPlatforms,
 	data: any
 ): string | undefined => {
-	const viewer = config[platform]?.find(viewer => viewer(data));
-	return viewer && viewer(data);
+	const urlExtractor = config[platform]?.find(urlExtractor => urlExtractor(data));
+	return urlExtractor && urlExtractor(data);
 };
 
 export const getMediaUrl = getMediaUrlUnconfigured(config);

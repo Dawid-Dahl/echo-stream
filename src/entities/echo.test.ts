@@ -1,7 +1,7 @@
 import echo, {defaultEcho} from "./echo";
 import {EchoConstructorArg, DefaultEcho} from "./echoTypes";
 import {constructTwitterUrl} from "../utils/utils";
-import {Echo} from "../components/Echo";
+import {Echo} from "../components/echo/Echo";
 
 type Keys = "withoutMedia" | "withMedia" | "defaultEcho";
 

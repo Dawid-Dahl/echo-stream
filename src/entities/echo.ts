@@ -1,4 +1,4 @@
-import {Echo} from "../components/Echo";
+import {Echo} from "../components/echo/Echo";
 import {generateId} from "../utils/utils";
 import {EchoConstructorArg, EchoConstructorConfig} from "./echoTypes";
 

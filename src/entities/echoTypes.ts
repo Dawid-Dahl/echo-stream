@@ -1,6 +1,6 @@
 import {SocialMediaPlatforms} from "../types/types";
 import {defaultEcho} from "./echo";
-import {Echo} from "../components/Echo";
+import {Echo} from "../components/echo/Echo";
 
 type DefaultEchoKeys = typeof defaultEcho;
 

@@ -1,13 +1,16 @@
 import {eventChannel} from "redux-saga";
+import {take, spawn, put, call} from "redux-saga/effects";
 import {_select, getEmittedEvent} from "./selectors";
 import echoConverter from "../utils/echoConverter";
-import {Echo} from "../components/Echo";
+import {Echo} from "../components/echo/Echo";
 import {addSingleEcho} from "../actions/echoActions";
 import {
 	closeSocketConnection,
 	openSocketConnection,
 	openSocketConnectionRejected,
+	closeSocketConnectionRejected,
 } from "../actions/socketActions";
+import socketService from "../utils/socketService";
 
 export function* subscribe(socket: SocketIOClient.Socket) {
 	const emittedEvent = yield* _select(getEmittedEvent);
@@ -16,7 +19,6 @@ export function* subscribe(socket: SocketIOClient.Socket) {
 
 	return eventChannel(emit => {
 		const storeAsEcho = (data: any) => {
-			console.log(JSON.stringify(data));
 			const echo = echoConverter("twitter", data);
 			emit(addSingleEcho(echo as Echo));
 		};
@@ -33,4 +35,32 @@ export function* subscribe(socket: SocketIOClient.Socket) {
 			console.log("Socket connection was closed!!!");
 		};
 	});
+}
+
+export function* workerSocketListen(socket: SocketIOClient.Socket) {
+	const emittedEvent = yield* _select(getEmittedEvent);
+
+	const channel = yield call(subscribe, socket);
+
+	while (true) {
+		const action:
+			| ReturnType<typeof openSocketConnection>
+			| ReturnType<typeof closeSocketConnection>
+			| ReturnType<typeof closeSocketConnectionRejected> = yield take(channel);
+
+		if (action.type === "CLOSE_SOCKET_CONNECTION") socketService.close(socket, emittedEvent);
+
+		yield put(action);
+	}
+}
+
+export function* workerSocketConnect() {
+	const socket: SocketIOClient.Socket | null = yield call(
+		[socketService, socketService.connect],
+		process.env.SERVER_URL!
+	);
+
+	if (!socket) throw new Error("Socket connection couldn't be established.");
+
+	yield spawn(workerSocketListen, socket);
 }

@@ -1,6 +1,6 @@
 import echoConverter from "./echoConverter";
 import {twitterData} from "./mockData/jestTestData";
-import {Echo} from "../components/Echo";
+import {Echo} from "../components/echo/Echo";
 import {expectedEcho} from "../entities/echo.test";
 
 const mockIdsAndDates = (echo: Echo): Echo => {

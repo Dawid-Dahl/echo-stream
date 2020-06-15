@@ -1,7 +1,7 @@
 import {JsonResponse} from "../types/types";
 import {Stream} from "twit";
 import {Request} from "express-serve-static-core";
-import {Echo} from "../components/Echo";
+import {Echo} from "../components/echo/Echo";
 
 export const range = (start: number, end: number): number[] =>
 	end <= start ? [end] : [...range(start, end - 1), end];

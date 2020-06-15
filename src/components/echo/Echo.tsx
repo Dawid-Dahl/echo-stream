@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {SocialMediaPlatforms} from "../types/types";
+import {SocialMediaPlatforms} from "../../types/types";
 
 export type Echo = Readonly<{
 	id: string;
@@ -23,10 +23,10 @@ type Props = Omit<Echo, "id">;
 const Echo: React.FC<Props> = ({text, sourceLikesFavorites, author, date}) => {
 	return (
 		<Wrapper>
-			<h3>{text}</h3>
-			<p>{sourceLikesFavorites}</p>
-			<p>{author}</p>
-			<p>{date}</p>
+			{/* <EchoMedia mediaUrl={mediaUrl} />
+			<EchoText text={text} />
+			<EchoFooter date={date} author={author} /> */}
+			<h1>{text}</h1>
 		</Wrapper>
 	);
 };
