@@ -9,7 +9,6 @@ type Props = {
 };
 
 const FeedHeader: React.FC<Props> = ({text, hashtag}) => {
-	const dispatch = useDispatch();
 	return (
 		<Wrapper>
 			<p>{`${text}: ${hashtag}`}</p>
