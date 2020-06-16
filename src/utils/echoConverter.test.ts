@@ -48,7 +48,7 @@ describe("echoConverter", () => {
 
 			const echo = mockIdsAndDates(unmockedEchoWithoutMedia);
 
-			expect(unmockedEchoWithoutMedia).toEqual(expectedEcho.withoutMedia);
+			expect(echo).toEqual(expectedEcho.withoutMedia);
 		});
 	});
 
@@ -61,7 +61,7 @@ describe("echoConverter", () => {
 
 			const echo = mockIdsAndDates(unmockedEchoWithOwnUploadedImage);
 
-			expect(unmockedEchoWithOwnUploadedImage).toEqual(expectedEcho.withMedia);
+			expect(echo).toEqual(expectedEcho.withMedia);
 		});
 	});
 
