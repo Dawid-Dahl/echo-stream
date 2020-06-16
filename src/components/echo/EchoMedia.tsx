@@ -8,7 +8,6 @@ type Props = {
 
 const EchoMedia: React.FC<Props> = ({mediaUrl, sourceLink}) => {
 	const isVideo = mediaUrl ? Boolean(mediaUrl.match(/video.twimg.com/)) : false;
-	const isGif = mediaUrl ? Boolean(mediaUrl.match(/video.twimg.com/)) : false;
 
 	return (
 		<>
