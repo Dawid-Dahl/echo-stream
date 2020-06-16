@@ -39,3 +39,6 @@ export const constructTwitterUrl = (
 	authorScreenName && sourceId
 		? `https://twitter.com/${authorScreenName}/status/${sourceId}`
 		: "";
+
+export const stringTrimmer = (trimAway: string, str: string) =>
+	str ? str.replace(new RegExp(trimAway), "") : "";

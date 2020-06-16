@@ -20,13 +20,13 @@ const Wrapper = styled.div`
 	width: 100%;
 
 	p {
-		padding: 1em 1em;
+		padding: 1em 1em 0.5em 1em;
 		margin: 0;
 		text-align: center;
 	}
 
 	h2 {
-		padding: 1em 1em;
+		padding: 1em 1em 0.5em 1em;
 		margin: 0;
 		text-align: center;
 	}

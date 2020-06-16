@@ -6,7 +6,7 @@ import {startFeed} from "./actions/feedActions";
 const App: React.FC = () => {
 	const dispatch = useDispatch();
 
-	const HASHTAG = "#dogs";
+	const HASHTAG = "#test123";
 
 	useEffect(() => {
 		dispatch(startFeed(HASHTAG));

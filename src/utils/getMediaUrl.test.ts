@@ -24,13 +24,13 @@ describe("the getMediaUrl fn, which extracts the appropriate media from the supp
 
 		it("it should get mediaURL from tweet with linked image", () => {
 			expect(getMediaUrl("twitter", twitterData.tweetWithLinkedImage)).toBe(
-				"https://t.co/WWPZTaCCIS"
+				"https://www.aljazeera.com/mritems/imagecache/mbdxxlarge/mritems/Images/2020/4/13/ecab8c7af42a439d9043b0ade6e1f05b_18.jpg"
 			);
 		});
 
 		it("it should get mediaURL from tweet with video link from Youtube", () => {
 			expect(getMediaUrl("twitter", twitterData.tweetWithYoutubeVideoLink)).toBe(
-				"https://t.co/qpASLlqsbS"
+				"https://youtu.be/FgnxcUQ5vho"
 			);
 		});
 

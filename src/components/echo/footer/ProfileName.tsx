@@ -10,7 +10,7 @@ const ProfileName: React.FC<Props> = ({author, authorScreenName}) => {
 	return (
 		<>
 			<Wrapper>
-				<p>{`${authorScreenName} (${authorScreenName})`}</p>
+				<p>{`${author} (${authorScreenName})`}</p>
 			</Wrapper>
 		</>
 	);

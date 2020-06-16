@@ -1,6 +1,6 @@
 import express from "express";
 import T from "../../config/twitConfig";
-import {jsonResponse, unconfiguredSetLocalNodeState} from "../../src/utils/utils";
+import {jsonResponse} from "../../src/utils/utils";
 import {Stream} from "twit";
 import {ioServer} from "../../server";
 import {Platforms} from "../../src/types/enums";
