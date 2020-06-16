@@ -6,12 +6,12 @@ import {ioServer} from "../../server";
 import {Platforms} from "../../src/types/enums";
 import {restartServer} from "./api-utils/apiUtils";
 
-const feedRouter = express.Router();
+const streamRouter = express.Router();
 
 //global variable for Twitter stream
 let stream: Stream | null = null;
 
-feedRouter.post("/start", async (req, res) => {
+streamRouter.post("/start", async (req, res) => {
 	try {
 		const {hashtag} = req.body;
 
@@ -46,7 +46,7 @@ feedRouter.post("/start", async (req, res) => {
 	}
 });
 
-feedRouter.get("/stop", async (req, res) => {
+streamRouter.get("/stop", async (req, res) => {
 	try {
 		if (!stream) {
 			res.status(404).json(
@@ -75,4 +75,4 @@ feedRouter.get("/stop", async (req, res) => {
 	}
 });
 
-export default feedRouter;
+export default streamRouter;

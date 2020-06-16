@@ -13,7 +13,7 @@ const initialState: EchoReducerState = {
 
 //fake
 /* const initialState: EchoReducerState = {
-	echoes: Object.values(twitterData).map(data => echoConverter("twitter", data)),
+	echoes: [echoConverter("twitter", tweet)],
 }; */
 
 export const echoReducer = (

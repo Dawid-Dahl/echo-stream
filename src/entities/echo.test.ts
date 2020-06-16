@@ -57,7 +57,7 @@ export const expectedEcho: ExpectedResultObject = {
 	},
 };
 
-describe("echo.from method", () => {
+describe("echo method", () => {
 	const obligatoryEchoConstructorArg: EchoConstructorArg = {
 		sourceId: "1271062275340873730",
 		text: "TESTTESTTEST #test123456",
@@ -101,7 +101,7 @@ describe("echo.from method", () => {
 	};
 
 	it("should construct an echo if given arg object with obligatory keys", () => {
-		const constructedEcho = echo.from(obligatoryEchoConstructorArg);
+		const constructedEcho = echo.create(obligatoryEchoConstructorArg);
 		// @ts-ignore
 		constructedEcho.id = "123";
 		// @ts-ignore
@@ -111,7 +111,7 @@ describe("echo.from method", () => {
 	});
 
 	it("should construct an echo if given arg object with obligatory keys in different order", () => {
-		const constructedEcho = echo.from(obligatoryEchoConstructorArgScrambled);
+		const constructedEcho = echo.create(obligatoryEchoConstructorArgScrambled);
 		// @ts-ignore
 		constructedEcho.id = "123";
 		// @ts-ignore
@@ -121,7 +121,7 @@ describe("echo.from method", () => {
 	});
 
 	it("should construct an echo if given a mediaUrl key in the arg object", () => {
-		const constructedEcho = echo.from(obligatoryEchoConstructorArgWithMedia);
+		const constructedEcho = echo.create(obligatoryEchoConstructorArgWithMedia);
 		// @ts-ignore
 		constructedEcho.id = "123";
 		// @ts-ignore
@@ -133,7 +133,7 @@ describe("echo.from method", () => {
 	it(`should construct an echo with default values for keys in arg object 
 		that are cased incorrectly`, () => {
 		//@ts-ignore
-		const constructedEcho = echo.from({
+		const constructedEcho = echo.create({
 			sourceId: "1271062275340873730",
 			//@ts-ignore
 			Text: "TESTTESTTEST #test123456",
@@ -172,7 +172,7 @@ describe("echo.from method", () => {
 	it(`should ignore keys in arg object that does not match keys in 
         config.echoConstructorArgKeys and give back default values instead`, () => {
 		//@ts-ignore
-		const constructedEcho = echo.from({lol: 4, crazy: "cat", 5: true});
+		const constructedEcho = echo.create({lol: 4, crazy: "cat", 5: true});
 		// @ts-ignore
 		constructedEcho.id = "123";
 		// @ts-ignore

@@ -1,5 +1,5 @@
 import express from "express";
-import feedRouter from "./feedRouter";
+import streamRouter from "./streamRouter";
 import {jsonResponse} from "../../src/utils/utils";
 import tweetsRouter from "./tweetsRouter";
 
@@ -10,7 +10,7 @@ apiRouter.get("/ping", (req, res, next) => {
 	next();
 });
 
-apiRouter.use("/feed", feedRouter);
+apiRouter.use("/feed", streamRouter);
 apiRouter.use("/tweets", tweetsRouter);
 
 export default apiRouter;

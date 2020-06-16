@@ -49,11 +49,11 @@ const config = {
 			}
 		},
 		//linked image or Youtube video
-		(data: any) =>
+		/* (data: any) =>
 			R.view<any, string | undefined>(
 				R.lensPath(["tweet", "entities", "urls", 0, "expanded_url"]),
 				data
-			),
+			), */
 	],
 	instagram: [],
 	facebook: [],

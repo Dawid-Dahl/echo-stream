@@ -13,8 +13,8 @@ const FeedHeader: React.FC<Props> = ({text, hashtag}) => {
 	return (
 		<Wrapper>
 			<p>{`${text}: ${hashtag}`}</p>
-			<button onClick={e => hashtag && dispatch(startFeed(hashtag))}>START FEED ASYNC</button>
-			<button onClick={e => dispatch(stopFeed())}>STOP FEED ASYNC</button>
+			{/* <button onClick={e => hashtag && dispatch(startFeed(hashtag))}>START FEED ASYNC</button>
+			<button onClick={e => dispatch(stopFeed())}>STOP FEED ASYNC</button> */}
 		</Wrapper>
 	);
 };

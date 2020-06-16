@@ -7,13 +7,14 @@ type Props = {
 };
 
 const EchoMedia: React.FC<Props> = ({mediaUrl, sourceLink}) => {
-	const isVideo = mediaUrl ? Boolean(mediaUrl.match(/video.twimg.com\/ext_tw_video/)) : false;
+	const isVideo = mediaUrl ? Boolean(mediaUrl.match(/video.twimg.com/)) : false;
+	const isGif = mediaUrl ? Boolean(mediaUrl.match(/video.twimg.com/)) : false;
 
 	return (
 		<>
 			<Wrapper>
 				{isVideo ? (
-					<video src={mediaUrl} controls></video>
+					<video src={mediaUrl} controls loop autoPlay={true}></video>
 				) : mediaUrl ? (
 					<a href={sourceLink} target="_blank" rel="noopener noreferrer">
 						<img src={mediaUrl} alt="media image" />
@@ -29,6 +30,8 @@ const EchoMedia: React.FC<Props> = ({mediaUrl, sourceLink}) => {
 export default EchoMedia;
 
 const Wrapper = styled.div`
+	width: 100%;
+
 	img {
 		width: 100%;
 		max-height: 25em;
