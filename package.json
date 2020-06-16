@@ -1,5 +1,5 @@
 {
-	"name": "dynamic-twitter-feed",
+	"name": "echo-stream",
 	"version": "1.0.0",
 	"description": "",
 	"main": "server.ts",
@@ -11,14 +11,14 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/Dawid-Dahl/dynamic-twitter-feed.git"
+		"url": "git+https://github.com/Dawid-Dahl/echo-stream.git"
 	},
 	"author": "Dawid Dahl",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/Dawid-Dahl/dynamic-twitter-feed/issues"
+		"url": "https://github.com/Dawid-Dahl/echo-stream/issues"
 	},
-	"homepage": "https://github.com/Dawid-Dahl/dynamic-twitter-feed#readme",
+	"homepage": "https://github.com/Dawid-Dahl/echo-stream#readme",
 	"dependencies": {
 		"cors": "^2.8.5",
 		"dayjs": "^1.8.28",
