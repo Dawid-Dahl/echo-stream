@@ -4,9 +4,10 @@
 	"description": "",
 	"main": "server.ts",
 	"scripts": {
-		"start": "parcel ./src/index.html",
-		"start-server": "npx ts-node ./server.ts",
-		"build": "parcel build src/index.html",
+		"start": "node dist/server/server/server.js",
+		"dev-start": "npx ts-node ./server.ts",
+		"build": "tsc && parcel build src/client/index.html --out-dir dist/client",
+		"dev-build": "parcel build src/client/index.html --out-dir dist/client",
 		"test": "jest"
 	},
 	"repository": {

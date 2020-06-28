@@ -1,7 +1,7 @@
 import express from "express";
 import streamRouter from "./streamRouter";
-import {jsonResponse} from "../../src/utils/utils";
 import tweetsRouter from "./tweetsRouter";
+import {jsonResponse} from "../../../client/utils/utils";
 
 const apiRouter = express.Router();
 

@@ -1,10 +1,10 @@
 import "dotenv/config";
 import express from "express";
 import errorhandler from "errorhandler";
-import apiRouter from "./api/routes/api";
 import morgan from "morgan";
 import cors from "cors";
 import io from "socket.io";
+import apiRouter from "./api/routes/api";
 
 const app = express();
 
@@ -21,7 +21,7 @@ app.use(
 );
 
 if (process.env.NODE_ENV === "production") {
-	app.use(express.static("dist"));
+	app.use(express.static("dist/client"));
 }
 
 app.use("/api", apiRouter);
