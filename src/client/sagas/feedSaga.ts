@@ -13,11 +13,13 @@ import {JsonResponse, ParsedJsonResponsePayload} from "../types/types";
 import {workerSocketConnect} from "./socketGenerators";
 import {_select} from "./selectors";
 
+const SERVER_URL = process.env.SERVER_URL && "";
+
 function* workerStartFeed({hashtag}: ReturnType<typeof startFeed>) {
 	try {
 		yield put(setHashtag(hashtag));
 
-		const res = yield call(fetch, `${process.env.SERVER_URL}/api/feed/start`, {
+		const res = yield call(fetch, `${SERVER_URL}/api/feed/start`, {
 			method: "POST",
 			body: JSON.stringify({hashtag}),
 			headers: {
@@ -43,7 +45,7 @@ function* workerStartFeed({hashtag}: ReturnType<typeof startFeed>) {
 
 function* workerStopFeed() {
 	try {
-		const res = yield call(fetch, `${process.env.SERVER_URL}/api/feed/stop`);
+		const res = yield call(fetch, `${SERVER_URL}/api/feed/stop`);
 		if (res.ok) {
 			yield put(stopFeedFulfilled());
 		} else {

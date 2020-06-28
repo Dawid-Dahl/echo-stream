@@ -12,6 +12,8 @@ import {
 } from "../actions/socketActions";
 import socketService from "../utils/socketService";
 
+const SERVER_URL = process.env.SERVER_URL && "";
+
 export function* subscribe(socket: SocketIOClient.Socket) {
 	const emittedEvent = yield* _select(getEmittedEvent);
 
@@ -59,7 +61,7 @@ export function* workerSocketListen(socket: SocketIOClient.Socket) {
 export function* workerSocketConnect() {
 	const socket: SocketIOClient.Socket | null = yield call(
 		[socketService, socketService.connect],
-		process.env.SERVER_URL!
+		SERVER_URL!
 	);
 
 	if (!socket) throw new Error("Socket connection couldn't be established.");
