@@ -13,8 +13,6 @@ import {JsonResponse, ParsedJsonResponsePayload} from "../types/types";
 import {workerSocketConnect} from "./socketGenerators";
 import {_select} from "./selectors";
 
-const SERVER_URL = "";
-
 function* workerStartFeed({hashtag}: ReturnType<typeof startFeed>) {
 	try {
 		yield put(setHashtag(hashtag));
