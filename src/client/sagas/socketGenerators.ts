@@ -61,7 +61,7 @@ export function* workerSocketListen(socket: SocketIOClient.Socket) {
 export function* workerSocketConnect() {
 	const socket: SocketIOClient.Socket | null = yield call(
 		[socketService, socketService.connect],
-		SERVER_URL!
+		"/"
 	);
 
 	if (!socket) throw new Error("Socket connection couldn't be established.");
