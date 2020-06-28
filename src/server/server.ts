@@ -28,8 +28,6 @@ app.use("/api", apiRouter);
 
 app.use(errorhandler());
 
-//test
-
 export const server = app.listen(PORT, () => console.log(`Server now listening at port: ${PORT}`));
 
 export const ioServer = io.listen(server);
