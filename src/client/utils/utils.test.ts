@@ -56,7 +56,7 @@ describe("addHashtagToString", () => {
 			expect(addHashtagToString(string)).toBe("#cars");
 		});
 	});
-	describe("happy path", () => {
+	describe("sad path", () => {
 		it("should return an empty string if given an empty string", () => {
 			const string = "";
 			expect(addHashtagToString(string)).toBe("");
