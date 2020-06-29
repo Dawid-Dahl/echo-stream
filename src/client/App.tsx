@@ -21,8 +21,6 @@ const App: React.FC = () => {
 
 	const HASHTAG = "#dogs";
 
-	//test
-
 	useEffect(() => {
 		dispatch(startFeed(HASHTAG, "drama"));
 	}, []);
