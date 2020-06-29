@@ -19,7 +19,7 @@ const App: React.FC = () => {
 		}
 	};
 
-	const HASHTAG = "#dramatix";
+	const HASHTAG = "#dogs";
 
 	useEffect(() => {
 		dispatch(startFeed(HASHTAG, "drama"));
