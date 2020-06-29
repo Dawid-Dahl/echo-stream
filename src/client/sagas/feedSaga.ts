@@ -12,28 +12,38 @@ import {
 import {JsonResponse, ParsedJsonResponsePayload} from "../types/types";
 import {workerSocketConnect} from "./socketGenerators";
 import {_select} from "./selectors";
+import {clearEchoes} from "../actions/echoActions";
 
-function* workerStartFeed({hashtag}: ReturnType<typeof startFeed>) {
+function* workerStartFeed({hashtag, password}: ReturnType<typeof startFeed>) {
 	try {
-		yield put(setHashtag(hashtag));
-
 		const res = yield call(fetch, `${process.env.SERVER_URL}/api/feed/start`, {
 			method: "POST",
-			body: JSON.stringify({hashtag}),
+			body: JSON.stringify({hashtag, password}),
 			headers: {
 				"Content-Type": "application/json",
 			},
 		});
 
 		if (res.ok) {
+			yield put(setHashtag(hashtag));
+
 			const data: JsonResponse = yield call([res, "json"]);
 
 			const {emittedEvent}: ParsedJsonResponsePayload = JSON.parse(data.payload as string);
 
 			yield put(startFeedFulfilled());
 			yield put(setEmittedEvent(emittedEvent));
+			yield put(clearEchoes());
 		} else {
-			yield put(startFeedRejected("Couldn't connect to the feed server."));
+			const data: JsonResponse = yield call([res, "json"]);
+
+			const {message}: ParsedJsonResponsePayload = JSON.parse(data.payload as string);
+
+			if (message === "Incorrect password") {
+				return;
+			} else {
+				yield put(startFeedRejected("Couldn't connect to the feed server."));
+			}
 		}
 	} catch (e) {
 		console.log(e);

@@ -6,4 +6,9 @@ export const addSingleEcho = (payload: Echo) =>
 		payload,
 	} as const);
 
-export type EchoActionTypes = ReturnType<typeof addSingleEcho>;
+export const clearEchoes = () =>
+	({
+		type: "CLEAR_ECHOES",
+	} as const);
+
+export type EchoActionTypes = ReturnType<typeof addSingleEcho> | ReturnType<typeof clearEchoes>;

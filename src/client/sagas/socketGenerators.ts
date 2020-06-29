@@ -34,7 +34,7 @@ export function* subscribe(socket: SocketIOClient.Socket) {
 
 		return () => {
 			socket.close();
-			console.log("Socket connection was closed!!!");
+			console.log("Socket connection was closed!");
 		};
 	});
 }
@@ -50,7 +50,10 @@ export function* workerSocketListen(socket: SocketIOClient.Socket) {
 			| ReturnType<typeof closeSocketConnection>
 			| ReturnType<typeof closeSocketConnectionRejected> = yield take(channel);
 
-		if (action.type === "CLOSE_SOCKET_CONNECTION") socketService.close(socket, emittedEvent);
+		if (action.type === "CLOSE_SOCKET_CONNECTION") {
+			yield call([socketService, socketService.close], socket, emittedEvent);
+			channel.close();
+		}
 
 		yield put(action);
 	}

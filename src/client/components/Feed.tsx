@@ -6,6 +6,7 @@ import FeedHeader from "./FeedHeader";
 import {useSelector} from "react-redux";
 import WelcomeMessage from "./WelcomeMessage";
 import {config} from "dotenv";
+import Admin from "./admin/Admin";
 
 config({
 	path: "../../.env",
@@ -20,6 +21,7 @@ const Feed: React.FC<Props> = () => {
 	return (
 		<Wrapper>
 			<FeedHeader text="DELTA I KONVERSATIONEN PÅ TWITTER" hashtag={hashtag} />
+			<Admin />
 			{echoes.length === 0 ? (
 				<WelcomeMessage hashtag={hashtag} />
 			) : (

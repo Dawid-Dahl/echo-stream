@@ -1,4 +1,4 @@
-import {constructTwitterUrl, stringTrimmer} from "./utils";
+import {constructTwitterUrl, stringTrimmer, addHashtagToString} from "./utils";
 
 describe("constructTwitterUrl", () => {
 	const sourceId = "1271145879878144009";
@@ -37,6 +37,42 @@ describe("stringTrimmer", () => {
 		it("should return an empty string if str is undefined", () => {
 			//@ts-ignore
 			expect(stringTrimmer("___normal", undefined)).toBe("");
+		});
+	});
+});
+
+describe("addHashtagToString", () => {
+	describe("happy path", () => {
+		it("should add an hashtag to a string without an hashtag", () => {
+			const string = "cars";
+			expect(addHashtagToString(string)).toBe("#cars");
+		});
+		it("should do nothing to a string that already has an hashtag", () => {
+			const string = "#cars";
+			expect(addHashtagToString(string)).toBe("#cars");
+		});
+		it("should do remove extra hastags and let one remain if string has many hashtags", () => {
+			const string = "###cars";
+			expect(addHashtagToString(string)).toBe("#cars");
+		});
+	});
+	describe("happy path", () => {
+		it("should return an empty string if given an empty string", () => {
+			const string = "";
+			expect(addHashtagToString(string)).toBe("");
+		});
+		it("should return an empty string if given a number", () => {
+			const input = 5;
+			//@ts-ignore
+			expect(addHashtagToString(input)).toBe("");
+		});
+		it("should return an empty string if given null or undefined", () => {
+			const input = null;
+			const input2 = undefined;
+			//@ts-ignore
+			expect(addHashtagToString(input)).toBe("");
+			//@ts-ignore
+			expect(addHashtagToString(input2)).toBe("");
 		});
 	});
 });

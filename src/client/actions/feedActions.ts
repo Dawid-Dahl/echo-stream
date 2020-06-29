@@ -1,9 +1,10 @@
 import {Hashtag, ParsedJsonResponsePayload} from "../types/types";
 
-export const startFeed = (hashtag: Hashtag) =>
+export const startFeed = (hashtag: Hashtag, password: string) =>
 	({
 		type: "START_FEED",
 		hashtag,
+		password,
 	} as const);
 
 export const startFeedFulfilled = () =>

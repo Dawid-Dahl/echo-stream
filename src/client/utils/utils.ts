@@ -42,3 +42,19 @@ export const constructTwitterUrl = (
 
 export const stringTrimmer = (trimAway: string, str: string) =>
 	str ? str.replace(new RegExp(trimAway), "") : "";
+
+export const addHashtagToString = (str: string) => {
+	if (str && typeof str === "string") {
+		if (str.match(/^#/)) {
+			if (str.match(/^#*/)) {
+				return `#${[...str.match(/^#*/)?.input].filter(cur => cur !== "#").join("")}` ?? "";
+			} else {
+				return str;
+			}
+		} else {
+			return `#${str}`;
+		}
+	} else {
+		return "";
+	}
+};
