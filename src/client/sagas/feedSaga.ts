@@ -1,4 +1,4 @@
-import {take, put, call, delay} from "redux-saga/effects";
+import {take, put, call, delay, all} from "redux-saga/effects";
 import {
 	startFeed,
 	startFeedFulfilled,
@@ -8,6 +8,8 @@ import {
 	startFeedRejected,
 	stopFeedRejected,
 	setHashtag,
+	connectToFeedRejected,
+	connectToFeedFulfilled,
 } from "../actions/feedActions";
 import {JsonResponse, ParsedJsonResponsePayload} from "../types/types";
 import {workerSocketConnect} from "./socketGenerators";
@@ -66,7 +68,65 @@ function* workerStopFeed() {
 	}
 }
 
+const workerGetHashtag = async () => {
+	try {
+		const res = await fetch(`${process.env.SERVER_URL}/api/feed/hashtag`);
+
+		if (res.ok) {
+			const data: JsonResponse = await res.json();
+
+			return JSON.parse(data.payload as string).hashtag;
+		} else {
+			console.log("Couldn't get hashtag");
+		}
+	} catch (e) {
+		console.log(e);
+	}
+};
+
+const workerGetEmittedEvent = async () => {
+	try {
+		const res = await fetch(`${process.env.SERVER_URL}/api/feed/emitted-event`);
+
+		if (res.ok) {
+			const data: JsonResponse = await res.json();
+
+			return JSON.parse(data.payload as string).hashtag;
+		} else {
+			console.log("Couldn't get the emitted event");
+		}
+	} catch (e) {
+		console.log(e);
+	}
+};
+
+function* workerConnectToFeed() {
+	try {
+		const res = yield call(fetch, `${process.env.SERVER_URL}/api/feed/hashtag`);
+		if (res.ok) {
+			const [hashtag, emittedEvent] = yield all([
+				call(workerGetHashtag),
+				call(workerGetEmittedEvent),
+			]);
+
+			yield put(setHashtag(hashtag));
+			yield put(setEmittedEvent(emittedEvent));
+			yield put(connectToFeedFulfilled());
+			yield call(workerSocketConnect);
+		} else {
+			yield put(connectToFeedRejected("Couldn't connect to feed"));
+		}
+	} catch (e) {
+		yield put(connectToFeedRejected("Couldn't connect to feed"));
+		console.log(e);
+	}
+}
+
 function* feedSaga() {
+	yield take("CONNECT_TO_FEED");
+
+	yield call(workerConnectToFeed);
+
 	const action: ReturnType<typeof startFeed> = yield take("START_FEED");
 
 	yield call(workerStartFeed, action);

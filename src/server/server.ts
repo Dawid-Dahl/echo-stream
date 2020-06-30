@@ -6,7 +6,7 @@ import cors from "cors";
 import io from "socket.io";
 import apiRouter from "./api/routes/api";
 
-const app = express();
+export const app = express();
 
 const PORT = process.env.PORT || 5000;
 
@@ -23,6 +23,10 @@ app.use(
 if (process.env.NODE_ENV === "production") {
 	app.use(express.static("dist/client"));
 }
+
+app.set("hashtag", "null");
+app.set("emittedEvent", "null");
+app.set("password", "drama");
 
 app.use("/api", apiRouter);
 

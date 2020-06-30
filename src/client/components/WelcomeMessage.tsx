@@ -28,7 +28,7 @@ const WelcomeMessage: React.FC<Props> = ({hashtag}) => {
 	) : (
 		<Wrapper>
 			<h2>Welcome to the Echo Stream!</h2>
-			<h3>Click ctrl + A to set the hashtag</h3>
+			<h3>Click ctrl + Q to set the hashtag</h3>
 		</Wrapper>
 	);
 };

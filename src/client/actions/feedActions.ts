@@ -40,6 +40,20 @@ export const setHashtag = (hashtag: Hashtag) =>
 		hashtag,
 	} as const);
 
+export const connectToFeed = () =>
+	({
+		type: "CONNECT_TO_FEED",
+	} as const);
+export const connectToFeedFulfilled = () =>
+	({
+		type: "CONNECT_TO_FEED_FULFILLED",
+	} as const);
+export const connectToFeedRejected = (message: string) =>
+	({
+		type: "CONNECT_TO_FEED_REJECTED",
+		message,
+	} as const);
+
 export const setEmittedEvent = (emittedEvent: ParsedJsonResponsePayload["emittedEvent"]) =>
 	({
 		type: "SET_EMITTED_EVENT",
@@ -54,4 +68,7 @@ export type FeedActionTypes =
 	| ReturnType<typeof stopFeedFulfilled>
 	| ReturnType<typeof stopFeedRejected>
 	| ReturnType<typeof setHashtag>
+	| ReturnType<typeof connectToFeed>
+	| ReturnType<typeof connectToFeedFulfilled>
+	| ReturnType<typeof connectToFeedRejected>
 	| ReturnType<typeof setEmittedEvent>;

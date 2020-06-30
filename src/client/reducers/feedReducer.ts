@@ -19,18 +19,18 @@ export const feedReducer = (
 	action: FeedActionTypes
 ): FeedReducerState => {
 	switch (action.type) {
-		case `START_FEED_FULFILLED`:
+		case "START_FEED_FULFILLED":
 			return {...state, isFeedActive: true, error: null};
-		case `START_FEED_REJECTED`:
+		case "START_FEED_REJECTED":
 			return {...state, isFeedActive: false, error: action.message};
-		case `STOP_FEED_FULFILLED`:
+		case "STOP_FEED_FULFILLED":
 			return {
 				...state,
 				isFeedActive: false,
 				emittedEvent: null,
 				error: null,
 			};
-		case `STOP_FEED_REJECTED`:
+		case "STOP_FEED_REJECTED":
 			return {...state, isFeedActive: false, error: action.message};
 		case "SET_HASHTAG":
 			return {...state, hashtag: action.hashtag};
