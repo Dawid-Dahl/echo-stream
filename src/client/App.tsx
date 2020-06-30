@@ -19,11 +19,11 @@ const App: React.FC = () => {
 		}
 	};
 
-	const HASHTAG = "#dogs";
+	/* const HASHTAG = "#dogs";
 
 	useEffect(() => {
 		dispatch(startFeed(HASHTAG, "drama"));
-	}, []);
+	}, []); */
 
 	useEffect(() => {
 		window.addEventListener("keydown", toggleAdmin);

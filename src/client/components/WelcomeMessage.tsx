@@ -19,12 +19,16 @@ type Props = {
 };
 
 const WelcomeMessage: React.FC<Props> = ({hashtag}) => {
-	const dispatch = useDispatch();
-	return (
+	return hashtag ? (
 		<Wrapper>
 			<h2>Welcome to the event!</h2>
 			<h3>See your message displayed here by posting to the hashtag:</h3>
 			<h1>{`${hashtag}`}</h1>
+		</Wrapper>
+	) : (
+		<Wrapper>
+			<h2>Welcome to the Echo Stream!</h2>
+			<h3>Click ctrl + A to set the hashtag</h3>
 		</Wrapper>
 	);
 };
