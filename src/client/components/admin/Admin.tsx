@@ -45,7 +45,7 @@ const Admin: React.FC<Props> = () => {
 				/>
 				<TextInput
 					value={password}
-					type="text"
+					type="password"
 					onChangeHandle={e => setPassword(e.target.value)}
 					name="Password"
 				/>
