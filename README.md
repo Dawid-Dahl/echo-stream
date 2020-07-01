@@ -1,3 +1,5 @@
 # Echo Stream
 
-Press ctrl + Q to choose a hashtag and start the feed. If the feed is already running, do the same again to change the hashtag and keep the stream running.
+Press ctrl + Q to choose a hashtag and start the feed.
+
+If the feed is already running, do the same again to change the hashtag and keep the stream running.
