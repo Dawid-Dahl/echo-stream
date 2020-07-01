@@ -37,7 +37,7 @@ streamRouter.post("/start", async (req, res) => {
 				jsonResponse(
 					true,
 					JSON.stringify({
-						message: "Stream has started as is emitting!",
+						message: "Stream has started!",
 						hashtag,
 						emittedEvent,
 					})
